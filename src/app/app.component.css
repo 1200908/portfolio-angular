@@ -1,0 +1,236 @@
+
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; line-height:1.6; background:#f4f4f4; color:#333;  margin: 0;
+  padding: 0;
+  overflow-x: hidden;}
+
+#container-principal {
+    padding: 20px; /* ou o valor que quiseres */
+}
+
+.container {
+  min-height: 100vh;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+header, section, footer { padding:60px 20px; }
+header {
+  text-align: center;
+  overflow-x: hidden;
+  height: 100vh;
+  background: #6383b8;
+  position: relative;
+  overflow: visible; /* alterar de hidden para visible */
+  padding-top: 120px; /* aumenta para navbar */
+  padding-bottom: 120px;
+}
+header p { font-size:1.2rem; color:#555; margin-bottom:20px; }
+.social-links a { display:inline-block; margin:0 5px; background:#fff; padding:8px; border-radius:50%; box-shadow:0 0 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
+
+.social-links a:hover { transform:scale(1.1); }
+.hero-image { width:150px; height:150px; border-radius:50%; border:4px solid #fff; margin:20px auto; display:block; object-fit:cover; }
+
+
+.social-links {
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  gap: 20px; /* espaço entre os links */
+  margin-bottom: 2rem;
+}
+
+.social-link {
+  width: 50px;
+  height: 50px;
+}
+
+.social-link img {
+  width: 60%; /* tamanho do ícone dentro do círculo */
+  height: 60%;
+}
+
+.social-link:hover {
+  transform: scale(1.2); /* aumenta ao passar o rato */
+  background: #f0f0f0; /* ligeiro efeito */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* sombra maior */
+}
+
+
+/* Sections */
+section { max-width:900px; margin:auto; background:#fff; border-radius:10px; margin-bottom:40px; }
+section h2 { text-align:center; font-size:2rem; margin-bottom:10px; color:#1e40af; }
+.divider { width:60px; height:4px; background:linear-gradient(to right,#1e40af,#4f46e5); margin:0 auto 20px; border-radius:2px; }
+.card { border:1px solid #ddd; border-radius:10px; padding:20px; margin:20px; transition: all 0.3s; }
+.card:hover { box-shadow:0 10px 20px rgba(0,0,0,0.1); }
+.skills-badge { display:inline-block; padding:5px 10px; margin:5px; border-radius:5px; background:#e0e7ff; color:#1e40af; font-size:0.9rem; }
+
+
+/* Animations */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px); /* mais blur para cobrir */
+  opacity: 0.3;
+  animation: blob 10s infinite;
+  z-index: 1;
+}
+.blob.delay1 { background: red; }
+.blob.delay2 { background: yellow; }
+@keyframes blob { 0%,
+     100%{transform:translate(0,0) scale(1);}
+     25%{ transform: translate(20px,-20px) scale(1.0); }
+     50%{ transform: translate(-20px,20px) scale(0.9); }
+     75%{ transform: translate(30px,30px) scale(1.05); } }
+
+
+
+.row-flex {
+  display: flex;
+  max-width: 1400px;
+  width: 100%;
+  gap: 20px;
+}
+
+.left-card {
+  flex: 1;
+  position: relative;
+  
+  border-radius: 15px;
+}
+
+.right-card {
+  flex: 2;
+}
+
+.card-left{
+  background:#ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-right {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.profile-card {
+  left: -5px;
+  position: relative;        /* necessário para posicionar o nome sobre a imagem */
+  width: 400px;              /* largura do card */
+  margin: auto;              /* centraliza horizontalmente */
+  border-radius: 8px;        /* bordas arredondadas */
+  overflow: hidden;          /* garante que nada "vaze" do card */
+  background-color: #d4f4f4;
+}
+
+.profile-pic {
+  background-color: #d4f4f4;
+  
+}
+
+.profile-name {
+  position: absolute;        /* sobre a imagem */
+  bottom: 0;                 /* canto inferior */
+  left: 0;
+  width: 100%;               /* ocupa toda a largura */
+  background-color: rgba(0,0,0,0.0); /* fundo semi-transparente */
+  color: white;
+  padding: 10px;
+  text-align: left;          /* podes mudar para center ou right */
+}
+
+.social-icons i {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.skills-badge {
+  display: inline-block;
+  background-color: #099f88;
+  color: white;
+  padding: 5px 10px;
+  margin: 3px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.skills-badge:hover {
+  transform: scale(1.2); /* aumenta ao passar o rato */
+  background-color: #1c8881; /* muda ligeiramente a cor */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* sombra maior */}
+
+.divider {
+  height: 2px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+.w3-light-grey {
+  max-width: 300px; /* por exemplo */
+  margin-bottom: 10px; /* espaçamento entre barras */
+}
+
+.navbar {
+  
+  position: sticky;       /* fica no topo ao rolar */
+  top: 0;
+  width: 100%;
+  background-color: #088; /* muda para a cor que quiseres */
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Container interno */
+.navbar-container {
+  display: flex;    
+  justify-content: space-between; /* logo à esquerda, links à direita */
+  align-items: center; 
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo à esquerda */
+.nav-logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Lista de links */
+.nav-links {
+  list-style: none;           /* remove os bullets */
+  display: flex;              /* coloca os itens na horizontal */
+  gap: 25px;                  /* espaço entre os links */
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo dos links */
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
+}
+
+/* Hover nos links */
+.nav-links li a:hover {
+  color: #a8e0ff;
+  transform: scale(1.1);
+}
+

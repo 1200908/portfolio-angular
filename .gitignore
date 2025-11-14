@@ -10,6 +10,9 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+/dist
+/.angular
+/.vscode
 
 # IDEs and editors
 .idea/
@@ -38,5 +41,15 @@ testem.log
 /typings
 
 # System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+src/environments/*.ts
+
+# OS files
 .DS_Store
 Thumbs.db
