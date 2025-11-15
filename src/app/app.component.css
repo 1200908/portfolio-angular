@@ -26,34 +26,11 @@ header {
   padding-bottom: 120px;
 }
 header p { font-size:1.2rem; color:#555; margin-bottom:20px; }
-.social-links a { display:inline-block; margin:0 5px; background:#fff; padding:8px; border-radius:50%; box-shadow:0 0 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
 
-.social-links a:hover { transform:scale(1.1); }
+
 .hero-image { width:150px; height:150px; border-radius:50%; border:4px solid #fff; margin:20px auto; display:block; object-fit:cover; }
 
 
-.social-links {
-  display: flex;
-  justify-content: center; /* centra horizontalmente */
-  gap: 20px; /* espaço entre os links */
-  margin-bottom: 2rem;
-}
-
-.social-link {
-  width: 50px;
-  height: 50px;
-}
-
-.social-link img {
-  width: 60%; /* tamanho do ícone dentro do círculo */
-  height: 60%;
-}
-
-.social-link:hover {
-  transform: scale(1.2); /* aumenta ao passar o rato */
-  background: #f0f0f0; /* ligeiro efeito */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* sombra maior */
-}
 
 
 /* Sections */
@@ -87,7 +64,7 @@ section h2 {
   padding: 10px;
   margin: 5px 10px; /* reduz espaçamento vertical */
   transition: all 0.3s;
-  
+
 }
 
 .card:hover {
@@ -114,23 +91,6 @@ section h2 {
   border-radius: 5px;
 }
 
-/* Animations */
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(150px); /* mais blur para cobrir */
-  opacity: 0.3;
-  animation: blob 10s infinite;
-  z-index: 1;
-}
-.blob.delay1 { background: red; }
-.blob.delay2 { background: yellow; }
-@keyframes blob { 0%,
-     100%{transform:translate(0,0) scale(1);}
-     25%{ transform: translate(20px,-20px) scale(1.0); }
-     50%{ transform: translate(-20px,20px) scale(0.9); }
-     75%{ transform: translate(30px,30px) scale(1.05); } }
-
 
 
 .row-flex {
@@ -143,7 +103,7 @@ section h2 {
 .left-card {
   flex: 1;
   position: relative;
-  
+
   border-radius: 15px;
 }
 
@@ -176,7 +136,7 @@ section h2 {
 
 .profile-pic {
   background-color: #d4f4f4;
-  
+
 }
 
 .profile-name {
@@ -239,8 +199,8 @@ section h2 {
 }
 
 .navbar {
-  
-  /*position: sticky;        fica no topo ao rolar 
+
+  /*position: sticky;        fica no topo ao rolar
   top: 0;*/
   position: fixed;
   top: 0;
@@ -254,9 +214,9 @@ section h2 {
 
 /* Container interno */
 .navbar-container {
-  display: flex;    
+  display: flex;
   justify-content: space-between; /* logo à esquerda, links à direita */
-  align-items: center; 
+  align-items: center;
   max-width: 1400px;
   margin: auto;
   display: flex;
