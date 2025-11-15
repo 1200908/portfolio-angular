@@ -87,6 +87,7 @@ section h2 {
   padding: 10px;
   margin: 5px 10px; /* reduz espaçamento vertical */
   transition: all 0.3s;
+  
 }
 
 .card:hover {
@@ -375,4 +376,10 @@ strong {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+
+.github-link :hover {
+  transform: scale(1.5);
+  color: #099f88;    /* cor ao passar o rato */
 }
