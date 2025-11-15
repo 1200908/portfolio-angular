@@ -57,6 +57,11 @@
           <p><a class="social-icons_" href="mailto:1200908@isep.ipp.pt">
             <i class="fa fa-envelope w3-text-teal fa-fw w3-margin-right"></i>Email
           </a></p>
+
+          <p>Download my <span class="tech-highlight">CV</span> in PDF format:</p>
+            <a href="../assets/Jorge_Vieira_CV.pdf" class="download-btn" target="_blank" download>
+              <i class="fa fa-download w3-text-teal fa-fw w3-margin-right"></i> Download CV
+            </a>
       </div>
 
         <h3>Technical Skills</h3>
@@ -158,16 +163,96 @@
           </div>
 
         </section>
+
          <section id="projects">
           <h2>Projects</h2>
-          <div class="divider">
+          <div class="divider"></div>
+
              <div class="card">
+             <div class="card-headerproject">
+              <img src="../assets/ISEP.png" class="logo-inline">
+              <div>
+                <h3>Library Management System</h3>
+                <h4>ISEP - Academic Project</h4>
+              </div>
+              </div>
 
+                <p>
+                  Academic project developed for two complementary courses, aiming to build a distributed library management system.
+                </p>
 
+                <ul> 
+                  <li><strong>Backend API:</strong><span class="tech-highlight"> Java</span>, <span class="tech-highlight"> Spring Boot</span>, <span class="tech-highlight"> JWT</span>, <span class="tech-highlight">JPA</span>, <span class="tech-highlight">PostgreSQL</span>, <span class="tech-highlight">Kafka</span></li>
+                  <li><strong>Frontend:</strong></li><ul>
+                  <li><strong>Android App:</strong><span class="tech-highlight"> Java</span>, <span class="tech-highlight">Android Studio</span></li>
+                  <li><strong>React Mobile App:</strong><span class="tech-highlight"> React</span></li>
+                  </ul>
+                </ul>
+                <br><br>
 
-             </div>
+                  <p><strong>Main Features & Technical Highlights:</strong></p>
+                  <ul>
+                    <li>Backend API built with <span class="tech-highlight">Spring Boot</span>, leveraging <span class="tech-highlight">JPA</span> for persistence and <span class="tech-highlight">Kafka</span> for asynchronous messaging between services.</li>
+                    <li>User authentication and registration with <span class="tech-highlight">JWT</span> for secure token-based login.</li>
+                    <li>Management of books, genres, and loans using <span class="tech-highlight">CQRS</span> pattern and <span class="tech-highlight">database-per-service</span> architecture.</li>
+                    <li>Android application (<span class="tech-highlight">Java</span>, <span class="tech-highlight">Android Studio</span>) with responsive UI.</li>
+                    <li>React mobile app for cross-platform access, connecting securely to backend APIs via REST endpoints.</li>
+                  </ul> 
+            <!-- Photos / Screenshots -->
+            <div class="project-images">
+              <figure>
+                <img src="../assets/image1.png" alt="Screenshot 1">
+                <figcaption>Screenshot of the Android app Login</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/image2.png" alt="Screenshot 1">
+                <figcaption>Screenshot of the Android app Menu</figcaption>
+              </figure>
+            </div>
+            </div>
+            <div class="card">
+            <div class="card-headerproject">
+              <img src="../assets/117-1171017_spring-logo-spring-framework-logo.png" class="logo-inline">
+              <div>
+                <h3>Java System Configuration Tool</h3>
+                <h4>Academic / Personal Project</h4>
+              </div>
+              <a href="https://github.com/1200908" target="_blank" style="margin-left:auto;">
+                <i class="fa fa-github fa-2x" style="color:#333;"></i>
+              </a>
+            </div>
+
+            <p>Project focusing on Java backend system configurations, including <span class="tech-highlight">SpiConfig</span> and <span class="tech-highlight">SystemConfigurations</span> management.</p>
+
+            <ul>
+              <li><strong>Technologies:</strong> <span class="tech-highlight">Java</span>, <span class="tech-highlight">Spring Boot</span>, <span class="tech-highlight">JUnit</span></li>
+              <li><strong>Highlights:</strong> Configuration management, automated testing, modular design.</li>
+            </ul>
           </div>
+
+          <div class="card">
+            <div class="card-headerproject">
+              <img src="../assets/OIP.png" class="logo-inline">
+              <div>
+                <h3>Frontend Portfolio</h3>
+                <h4>HTML & CSS Project</h4>
+              </div>
+              <a href="https://github.com/1200908" target="_blank" style="margin-left:auto;">
+                <i class="fa fa-github fa-2x" style="color:#333;"></i>
+              </a>
+            </div>
+
+            <p>This project demonstrates responsive web design using <span class="tech-highlight">HTML</span>, <span class="tech-highlight">CSS</span> and <span class="tech-highlight">Flexbox/Grid</span>.</p>
+
+            <ul>
+              <li><strong>Features:</strong> Responsive layout, cross-browser compatibility, custom animations.</li>
+              <li><strong>Highlights:</strong> Clean UI, interactive elements, semantic HTML.</li>
+            </ul>
+          </div>
+
          </section>
+
+         
 
       </div>
     </div>
@@ -175,7 +260,12 @@
 
   </div> <!-- Fim Row -->
 
+  
+
 </div> <!-- Fim container -->
+
+
+
 
 <footer class="w3-container w3-teal w3-center w3-margin-top" marginbottom= 5 px>
   <p>Find me on social media.</p>
