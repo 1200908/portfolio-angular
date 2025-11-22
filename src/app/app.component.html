@@ -58,7 +58,7 @@
           </a></p>
           <br>
           <p>Download my <span class="tech-highlight">CV</span> in PDF format:</p>
-            <a href="../assets/Jorge Miguel  Vieira.pdf" class="download-btn" target="_blank" download>
+            <a href="./assets/Jorge Miguel  Vieira.pdf" class="download-btn" target="_blank" download>
               <i class="fa fa-download w3-text-teal fa-fw w3-margin-right"></i> Download CV
             </a>
             <br>
@@ -135,7 +135,7 @@
 
           <div class="card">
           <div class="card-header">
-            <img src="./assets/ISEP.png" class="logo-inline">
+            <img ng serve="./assets/ISEP.png" class="logo-inline">
             <div>
             <h3>Bachelor's in Telecommunications and Informatics Engineering</h3>
             <p>Instituto Superior de Engenharia do Porto (ISEP) </p>
@@ -247,16 +247,33 @@
               </div>
             </div>
 
-            <p>
-              Project designed to implement a robust and scalable Java-based microservices architecture.
-              It leverages <span class="tech-highlight">Spring Boot</span> with <span class="tech-highlight">Spring Cloud Config</span> for centralized configuration management, <span class="tech-highlight">Eureka Service Registry</span> for dynamic service discovery, and an <span class="tech-highlight">API Gateway</span> to handle request routing and security.
-              The system is containerized with <span class="tech-highlight">Docker</span> for isolated database instances and service deployment, ensuring reproducibility and ease of scaling.
-              CQRS and database-per-service patterns are applied to maintain modularity and reliability across services, while automated testing with <span class="tech-highlight">JUnit</span> guarantees stability and maintainability.
-              </p>
+              <p>
+                This project is built to showcase a robust, scalable, and fully modular Java-based microservices architecture.
+                It leverages <span class="tech-highlight">Spring Boot</span> together with <span class="tech-highlight">Spring Cloud Config</span> for centralized configuration management and the
+                <span class="tech-highlight">Eureka Service Registry</span> for dynamic and resilient service discovery.
+                A centralized <span class="tech-highlight">API Gateway</span> was recently added to streamline request routing, enhance security,
+                and provide a unified entry point for all external clients.
 
+                The system also integrates a <span class="tech-highlight">Spring Mail</span> module, enabling automated email sending for notifications and application events, improving communication and system interaction.
+
+                All database are containerized using <span class="tech-highlight">Docker</span>.
+                Architectural patterns such as <span class="tech-highlight">CQRS</span> and <span class="tech-highlight">database-per-service</span> ensure modularity, autonomy, and clear data boundaries between services.
+                Automated testing with <span class="tech-highlight">JUnit</span> reinforces reliability and long-term maintainability.
+              </p>
+              <br /><br />
               <ul>
-                <li><strong>Technologies:</strong> Java, Spring Boot, Spring Cloud Config, Eureka, Docker, JUnit</li>
-                <li><strong>Highlights:</strong> Robust configuration management, scalable microservices, containerized deployment, modular design, automated testing</li>
+                <li>
+                  <strong>Technologies:</strong>
+                  <span class="tech-highlight">Java</span>,
+                  <span class="tech-highlight">Spring Boot</span>,
+                  <span class="tech-highlight">Spring Cloud Config</span>,
+                  <span class="tech-highlight">Eureka Service Registry</span>,
+                  <span class="tech-highlight">Spring Cloud Gateway</span>,
+                  <span class="tech-highlight">Spring Mail</span>,
+                  <span class="tech-highlight">CQRS</span>,
+                  <span class="tech-highlight">Docker</span>,
+                  <span class="tech-highlight">JUnit</span>
+                </li>                <li><strong>Highlights:</strong> Centralized configuration management, dynamic service discovery, unified API Gateway routing, automated email notifications, containerized deployment, modular microservice architecture, CQRS pattern, database-per-service, automated testing</li>
               </ul>
           </div>
 
