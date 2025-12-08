@@ -27,12 +27,6 @@ header {
 }
 header p { font-size:1.2rem; color:#555; margin-bottom:20px; }
 
-
-.hero-image { width:150px; height:150px; border-radius:50%; border:4px solid #fff; margin:20px auto; display:block; object-fit:cover; }
-
-
-
-
 /* Sections */
 section {
   max-width: 900px;
@@ -53,7 +47,7 @@ section h2 {
 .divider {
   width: 60px;
   height: 4px;
-  background: linear-gradient(to right, #099f88, #099f88);
+  background: #099f88;
   margin: 0 auto 10px; /* reduzido */
   border-radius: 2px;
 }
@@ -91,8 +85,6 @@ section h2 {
   border-radius: 5px;
 }
 
-
-
 .row-flex {
   display: flex;
   max-width: 1400px;
@@ -126,29 +118,25 @@ section h2 {
 }
 .profile-card {
   left: -5px;
-  position: relative;        /* necessário para posicionar o nome sobre a imagem */
-  width: 400px;              /* largura do card */
-  margin: auto;              /* centraliza horizontalmente */
-  border-radius: 8px;        /* bordas arredondadas */
-  overflow: hidden;          /* garante que nada "vaze" do card */
-  background-color: #d4f4f4;
-}
+  position: relative;
+  width: 400px;
+  margin: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #d4f4f4;}
 
 .profile-pic {
-  background-color: #d4f4f4;
-
-}
+  background-color: #d4f4f4;}
 
 .profile-name {
-  position: absolute;        /* sobre a imagem */
-  bottom: 0;                 /* canto inferior */
+  position: absolute;
+  bottom: 0;
   left: 0;
-  width: 100%;               /* ocupa toda a largura */
-  background-color: rgba(0,0,0,0.0); /* fundo semi-transparente */
+  width: 100%;
+  background-color: rgba(0,0,0,0.0);
   color: white;
   padding: 10px;
-  text-align: left;          /* podes mudar para center ou right */
-}
+  text-align: left;}
 
 .social-icons i {
   font-size: 24px;
@@ -179,43 +167,29 @@ section h2 {
 }
 
 .skills-badge:hover {
-  transform: scale(1.2); /* aumenta ao passar o rato */
-  background-color: #1c8881; /* muda ligeiramente a cor */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* sombra maior */}
-
-.divider {
-  height: 2px;
-  background-color: #ddd;
-  margin: 10px 0;
-}
-
-.card {
-  margin-bottom: 15px;
-}
+  transform: scale(1.2);
+  background-color: #1c8881;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
 .w3-light-grey {
-  max-width: 300px; /* por exemplo */
-  margin-bottom: 10px; /* espaçamento entre barras */
+  max-width: 300px;
+  margin-bottom: 10px;
 }
 
 .navbar {
-
-  /*position: sticky;        fica no topo ao rolar
-  top: 0;*/
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #088; /* muda para a cor que quiseres */
+  background-color: #088;
   padding: 10px 20px;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   font-family: 'Roboto', sans-serif;
 }
 
-/* Container interno */
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* logo à esquerda, links à direita */
+  justify-content: space-between;
   align-items: center;
   max-width: 1400px;
   margin: auto;
@@ -224,7 +198,6 @@ section h2 {
   align-items: center;
 }
 
-/* Logo à esquerda */
 .nav-logo {
   color: white;
   font-size: 1.5em;
@@ -232,16 +205,14 @@ section h2 {
   text-decoration: none;
 }
 
-/* Lista de links */
 .nav-links {
-  list-style: none;           /* remove os bullets */
-  display: flex;              /* coloca os itens na horizontal */
-  gap: 25px;                  /* espaço entre os links */
+  list-style: none;
+  display: flex;
+  gap: 25px;
   margin: 0;
   padding: 0;
 }
 
-/* Estilo dos links */
 .nav-links li a {
   color: white;
   text-decoration: none;
@@ -249,7 +220,6 @@ section h2 {
   transition: color 0.3s, transform 0.3s;
 }
 
-/* Hover nos links */
 .nav-links li a:hover {
   color: #a8e0ff;
   transform: scale(1.1);
@@ -286,8 +256,6 @@ section h2 {
   margin-top: 20px;
 }
 
-
-
 .project-images figure {
   display: flex;
   flex-direction: column;
@@ -315,7 +283,6 @@ ul {
   margin-left: 0;      /* remove margem */
   list-style-position: inside; /* bolinhas dentro do bloco */
 }
-
 
 @media (max-width: 600px) {
   .project-images img {
@@ -346,6 +313,7 @@ ul {
   transition: transform 0.3s, color 0.3s;
 }
 
+.link-highlight:hover,
 .tech-highlight:hover {
   transform: scale(1.4);
   color: #1c8881;
@@ -363,26 +331,15 @@ strong {
   gap: 10px;
 }
 
-
 .github-link :hover {
   transform: scale(1.5);
   color: #099f88;    /* cor ao passar o rato */
 }
 
 .link-highlight {
-  display: inline-block;   /* permite transformações */
+  display: inline-block;
   color: #347264;
   border-radius: 8px;
-  background: linear-gradient(
-    135deg,
-    rgba(9, 159, 136, 0.5) 0%,   /* #099f88 com 80% de opacidade */
-    rgba(102, 224, 199, 0.5) 50%, /* #66e0c7 com 80% de opacidade */
-    rgba(118, 75, 162, 0.5) 100%  /* #764ba2 com 80% de opacidade */
-  );  font-weight: bold;
   transition: transform 0.3s, color 0.3s;
 }
 
-.link-highlight:hover {
-  transform: scale(1.4);
-  color: #1c8881;
-}
