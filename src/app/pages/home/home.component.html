@@ -1,0 +1,137 @@
+<div class="home-container" id="containers-principal">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="animated-blob blob1"></div>
+      <div class="animated-blob blob2"></div>
+      <div class="animated-blob blob3"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Hi, I'm <span class="name-highlight">Jorge Vieira</span>
+        </h1>
+        <p class="hero-subtitle">
+          Telecommunications & Informatics Engineer
+        </p>
+        <p class="hero-description">
+          Passionate about building scalable solutions with modern technologies.
+          Specialized in backend development, cloud infrastructure, and distributed systems.
+        </p>
+
+        <div class="hero-buttons">
+          <a routerLink="/about" class="btn-primary">
+            <i class="fa fa-user"></i> View Full Profile
+          </a>
+          <a href="#projects" class="btn-secondary">
+            <i class="fa fa-code"></i> See My Work
+          </a>
+        </div>
+
+        <div class="hero-social">
+          <a href="https://www.linkedin.com/in/jorge-vieira-2a6b48380" target="_blank" class="social-link">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/1200908" target="_blank" class="social-link">
+            <i class="fa fa-github"></i>
+          </a>
+          <a href="mailto:1200908@isep.ipp.pt" class="social-link">
+            <i class="fa fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img src="assets/profpic2.png" alt="Jorge Vieira" class="profile-image">
+          <div class="image-glow"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" (click)="scrollToProjects()">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Tech Stack Quick View -->
+  <section id="tech" class="tech-stack-section">
+    <div class="container">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <i class="fa fa-coffee"></i>
+          <span>Java</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-code"></i>
+          <span>Python</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-leaf"></i>
+          <span>Spring Boot</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-cloud"></i>
+          <span>AWS</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-cubes"></i>
+          <span>Docker</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-database"></i>
+          <span>PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Explore some of my recent work</p>
+
+      <div class="projects-grid">
+        <div class="project-card" *ngFor="let project of projects">
+          <div class="project-image-container">
+            <img [src]="project.image" [alt]="project.title" class="project-image">
+            <div class="project-overlay">
+              <a [routerLink]="project.route" class="project-link">
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-content">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+
+            <div class="project-tags">
+              <span class="project-tag" *ngFor="let tag of project.tags">
+                {{ tag }}
+              </span>
+            </div>
+
+            <a [routerLink]="project.route" class="project-details-link">
+              View Details <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Let's Work Together</h2>
+      <p>Interested in collaboration? Check out my full profile and get in touch!</p>
+      <button (click)="goToEducation()" class="btn-primary-large">
+        <i class="fa fa-user"></i> View Complete Profile
+      </button>
+    </div>
+  </section>
+</div>

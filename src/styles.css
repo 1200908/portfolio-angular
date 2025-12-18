@@ -1,1 +1,283 @@
-/* You can add global styles to this file, and also import other style files */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; line-height:1.6; background:#f4f4f4; color:#333;  margin: 0;
+  padding: 0;
+  overflow-x: hidden;}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background: #099f88;
+  margin: 0 auto 10px; /* reduzido */
+  border-radius: 2px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 10px; /* reduz espaçamento vertical */
+  transition: all 0.3s;
+
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+
+.date {
+  font-style: italic;
+  color: #666; /* tom suave e profissional */
+  font-size: 0.95rem;
+}
+
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-inline {
+  width: 45px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.row-flex {
+  display: flex;
+  max-width: 1400px;
+  width: 100%;
+  gap: 20px;
+  margin: auto;
+  margin-top: 80px;
+
+}
+
+.left-card {
+  flex: 1;
+  position: relative;
+
+  border-radius: 15px;
+}
+
+.right-card {
+  flex: 2;
+}
+
+.card-right {
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.social-icons i {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.social-icons_ {
+  transition: margin-left 1s;
+}
+
+.social-icons_:hover {
+  font: rgb(255, 255, 255);
+  border-radius: 2px;
+  font-size: 21px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.skills-badge {
+  display: inline-block;
+  background-color: #099f88;
+  color: white;
+  padding: 5px 10px;
+  margin: 3px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.skills-badge:hover {
+  transform: scale(1.2);
+  background-color: #1c8881;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+.w3-light-grey {
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #088;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #a8e0ff;
+  transform: scale(1.1);
+}
+
+.project-images-blog {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.project-images-blog figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 600px;     /* mobile por padrão */
+}
+
+.project-images-blog img {
+  width: 100%;         /* ocupa 100% da figure */
+  height: auto;        /* mantém proporção natural */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.project-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;  /* centraliza horizontalmente */
+  margin-top: 20px;
+}
+
+.project-images figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 250px;          /* força todas as figuras a terem a mesma largura */
+}
+
+.project-images img {
+  width: 100%;           /* ocupa 100% da largura da figure */
+  height: 400px;         /* altura fixa para uniformizar todas as imagens */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.project-images figcaption {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+ul {
+  padding-left: 10px;     /* remove indentação padrão */
+  margin-left: 0;      /* remove margem */
+  list-style-position: inside; /* bolinhas dentro do bloco */
+}
+
+@media (max-width: 600px) {
+  .project-images img {
+    width: 100%; /* full width em mobile */
+    height: auto;
+  }
+
+  .row-flex {
+    flex-direction: column; /* empilha as colunas */
+  }
+
+  .left-card,
+  .right-card {
+    flex: 1;                /* ocupa 100% da largura */
+    margin-bottom: 20px;    /* espaçamento entre os blocos */
+  }
+
+  .profile-card {
+    width: 100%;             /* evita largura fixa da foto no mobile */
+  }
+
+}
+
+.tech-highlight {
+  display: inline-block;   /* permite transformações */
+  color: #099f88;
+  font-weight: bold;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.link-highlight:hover,
+.tech-highlight:hover {
+  transform: scale(1.4);
+  color: #1c8881;
+}
+
+strong {
+  color: #11564c; /* cor do teu tema */
+  font-weight: bold; /* mantém o negrito */
+}
+
+.card-headerproject{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.github-link :hover {
+  transform: scale(1.5);
+  color: #099f88;    /* cor ao passar o rato */
+}
+
+.link-highlight {
+  display: inline-block;
+  color: #347264;
+  border-radius: 8px;
+  transition: transform 0.3s, color 0.3s;
+}
