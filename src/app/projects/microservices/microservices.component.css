@@ -535,6 +535,7 @@
 /* ============================================
    OUTCOMES SECTION
    ============================================ */
+
 .outcomes-section {
   background: #e6f3ff;
   padding: 50px 40px;
@@ -580,7 +581,7 @@
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #667eea;
   margin-bottom: 10px;
@@ -623,72 +624,6 @@
   font-size: 1.05rem;
   line-height: 1.6;
   color: #444;
-}
-
-/* ============================================
-   CTA SECTION
-   ============================================ */
-.project-cta {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 80px 20px;
-  text-align: center;
-  color: white;
-}
-
-.cta-content h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.cta-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.95;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.cta-btn {
-  padding: 15px 35px;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.cta-btn.primary {
-  background: white;
-  color: #667eea;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.cta-btn.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.cta-btn.secondary {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  border: 2px solid white;
-  backdrop-filter: blur(10px);
-}
-
-.cta-btn.secondary:hover {
-  background: white;
-  color: #667eea;
-  transform: translateY(-3px);
 }
 
 /* ============================================
@@ -743,4 +678,5 @@
     text-align: center;
   }
 }
+
 
