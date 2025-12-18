@@ -1,9 +1,10 @@
 <nav class="navbar">
   <div class="nav-container">
-    <a routerLink="/" class="nav-logo">JV</a>
+    <a  (click)="goToHome()" routerLinkActive="active" class="nav-logo">JV</a>
     <ul class="nav-menu">
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li><a  (click)="goToHome()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a  (click)="goToProjects()" routerLinkActive="active"  >Projects</a>
+      <li><a  (click)="goToAbout()" routerLinkActive="active"  >About</a>
     </ul>
   </div>
 </nav>

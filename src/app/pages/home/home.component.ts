@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, PLATFORM_ID, Inject, ViewChild} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
+import { isPlatformBrowser } from '@angular/common';
+import {TimelineComponent} from "../../components/timeline/timeline.component";
+import Typed from 'typed.js';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink , CommonModule ],
+  imports: [RouterLink , CommonModule, TimelineComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   projects = [
     {
       id: 'library-management',
@@ -20,37 +23,29 @@ export class HomeComponent {
       route: '/projects/library'
     },
     {
-      id: 'project1',
-      title: 'E-Commerce Platform',
-      description: 'Full-stack application with Spring Boot and Angular',
-      image: 'assets/project1.jpg',
-      tags: ['Java', 'Spring Boot', 'Angular', 'PostgreSQL'],
-      route: '/projects/library'
+      id: 'frontend-portfolio',
+      title: 'Frontend Portfolio',
+      description: 'Responsive and interactive web interface built with modern HTML5, CSS3, and Flexbox/Grid.',
+      image: 'assets/pic_portfolio.png',
+      tags: ['HTML5', 'CSS3', 'Flexbox', 'Grid', 'Responsive Design', 'Animations'],
+      route: '/projects/portfolio'
     },
     {
-      id: 'project2',
-      title: 'Real-time Chat App',
-      description: 'Microservices architecture with RabbitMQ',
-      image: 'assets/project2.jpg',
-      tags: ['Node.js', 'RabbitMQ', 'Docker', 'AWS'],
-      route: '/projects/chat-app'
+      id: 'auto-generated-blog',
+      title: 'Auto-Generated Blogs',
+      description: 'Full-stack blog with automated content generation using AI, built as a technical challenge.',
+      image: 'assets/pic_blog.png',
+      tags: ['React', 'Node.js', 'PostgreSQL', 'Docker', 'AWS EC2', 'AWS ECR', 'AWS CodeBuild'],
+      route: '/projects/blog'
     },
     {
-      id: 'project3',
-      title: 'Data Analytics Dashboard',
-      description: 'Interactive dashboard with real-time data visualization',
-      image: 'assets/project3.jpg',
-      tags: ['Python', 'Kafka', 'React', 'AWS'],
-      route: '/projects/analytics'
+      id: 'java-microservices',
+      title: 'Java Microservices Manager',
+      description: 'Personal project showcasing a robust, scalable, and fully modular Java-based microservices architecture.',
+      image: 'assets/backend.png',
+      tags: ['Java', 'Spring Boot', 'Spring Cloud Config', 'Eureka', 'Spring Cloud Gateway', 'Spring Mail', 'CQRS', 'Docker', 'JUnit'],
+      route: '/projects/microservices'
     },
-    {
-      id: 'project4',
-      title: 'IoT Monitoring System',
-      description: 'Sensors monitoring with cloud integration',
-      image: 'assets/project4.jpg',
-      tags: ['C++', 'Python', 'AWS IoT', 'PostgreSQL'],
-      route: '/projects/iot-system'
-    }
   ];
 
   scrollToProjects() {
@@ -65,11 +60,34 @@ export class HomeComponent {
       behavior: 'smooth'
     });
   }
-  constructor(private router: Router) { }
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
   goToEducation() {
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
+  }
+
+  @ViewChild('typedElement') typedElement?: ElementRef;
+
+  typed?: Typed;
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId) && this.typedElement) {
+      const element = this.typedElement.nativeElement;
+      setTimeout(() => {
+        this.typed = new Typed(element, {
+          strings: [
+            'Telecommunications &amp; Informatics Engineer',
+            'Backend Developer',
+            'Cloud &amp; Distributed Systems Enthusiast'
+          ],
+          typeSpeed: 50,
+          backSpeed: 30,
+          backDelay: 1500,
+          loop: true,
+          showCursor: true
+        });
+      }, 50);
+    }
   }
 }

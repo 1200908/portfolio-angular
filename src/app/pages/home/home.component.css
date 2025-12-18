@@ -53,15 +53,15 @@
 
 .animated-blob {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
+  border-radius: 40%;
+  filter: blur(40px);
   animation: float 20s ease-in-out infinite;
 }
 
 .blob1 {
   width: 400px;
   height: 400px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   top: -100px;
   left: -100px;
   animation-delay: 0s;
@@ -70,7 +70,7 @@
 .blob2 {
   width: 300px;
   height: 300px;
-  background: rgba(99, 179, 237, 0.5);
+  background: rgba(99, 179, 237, 0.7);
   bottom: -50px;
   right: -50px;
   animation-delay: 7s;
@@ -79,7 +79,7 @@
 .blob3 {
   width: 350px;
   height: 350px;
-  background: rgba(90, 187, 68, 0.5);
+  background: rgba(90, 187, 68, 0.7);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -245,10 +245,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 420px;
-  height: 420px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(132, 250, 176, 0.4), transparent);
+  background: radial-gradient(circle, rgba(132, 250, 176, 0.3), transparent);
   animation: pulse 3s ease-in-out infinite;
   z-index: 1;
 }

@@ -1,0 +1,76 @@
+<section class="timeline-section">
+  <div class="container">
+    <h2 class="title">My Journey</h2>
+    <p class="subtitle">From student to engineer - the path so far</p>
+
+    <div #timelineContainer class="timeline">
+      <!-- Central line -->
+      <div class="line"></div>
+
+      <!-- Timeline Items -->
+      <div
+        *ngFor="let item of timelineData; let i = index"
+        class="timeline-item"
+        [attr.data-index]="i"
+        [ngClass]="{ 'left': isLeft(i), 'right': !isLeft(i) }"
+      >
+        <!-- Content Card -->
+        <div
+          class="card"
+          [ngClass]="{ 'visible': isVisible(i), 'active': isActive(i) }"
+          [style.border-left]="isLeft(i) ? '4px solid ' + item.color : 'none'"
+          [style.border-right]="!isLeft(i) ? '4px solid ' + item.color : 'none'"
+          [style.transition-delay]="getItemDelay(i)"
+          [style.box-shadow]="isActive(i) ? '0 20px 60px ' + item.color + '40' : '0 10px 30px rgba(0, 0, 0, 0.1)'"
+          (mouseenter)="setActive(i)"
+          (mouseleave)="clearActive()"
+        >
+          <!-- Card Header -->
+          <div class="card-header">
+            <span class="year" [style.color]="item.color">{{ item.year }}</span>
+            <span class="icon" [style.background]="item.color">{{ item.icon }}</span>
+          </div>
+
+          <!-- Card Content -->
+          <h3 class="card-title">{{ item.title }}</h3>
+          <h4 class="organization" [style.color]="item.color">{{ item.organization }}</h4>
+          <p class="description">{{ item.description }}</p>
+
+          <!-- Achievements - shown on hover -->
+          <div
+            class="achievements"
+            [ngClass]="{ 'active': isActive(i) }"
+          >
+            <div
+              *ngFor="let achievement of item.achievements; let j = index"
+              class="achievement"
+              [style.transition-delay]="getAchievementDelay(j)"
+            >
+              <span class="checkmark" [style.background]="item.color">✓</span>
+              {{ achievement }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Dot -->
+        <div class="dot-container">
+          <div
+            class="dot"
+            [ngClass]="{ 'visible': isVisible(i), 'active': isActive(i) }"
+            [style.background]="item.color"
+            [style.transition-delay]="getDotDelay(i)"
+            [style.box-shadow]="isActive(i) ? '0 0 30px ' + item.color : '0 0 10px ' + item.color + '80'"
+          >
+            <div
+              class="dot-pulse"
+              [ngClass]="{ 'active': isActive(i) }"
+              [style.border-color]="item.color"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Spacer for the other side -->
+        <div class="spacer"></div>
+      </div>
+    </div>
+  </div>

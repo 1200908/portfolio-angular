@@ -40,3 +40,8 @@
 .nav-menu a.active {
   color: #667eea;
 }
+
+.nav-menu a,
+.nav-logo {
+  cursor: pointer;
+}
