@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, PLATFORM_ID, Inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 interface TimelineItem {
   year: string;
   title: string;
@@ -93,12 +94,24 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   private observer!: IntersectionObserver;
 
+  isMobile = false;
   ngOnInit(): void {
-    // Componente inicializado
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = window.innerWidth <= 768;
+    }
   }
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngAfterViewInit(): void {
-    this.setupIntersectionObserver();
+
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (!('IntersectionObserver' in window)) {
+      this.visibleItems = new Set(this.timelineData.map((_, i) => i));
+      return;
+    }
+
+    setTimeout(() => this.setupIntersectionObserver(), 50);
   }
 
   ngOnDestroy(): void {
@@ -140,7 +153,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
 
   clearActive(): void {
-    this.activeIndex = null;
+    if (!this.isMobile) {
+      this.activeIndex = null;
+    }
   }
 
   isActive(index: number): boolean {
@@ -157,5 +172,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   getAchievementDelay(achievementIndex: number): string {
     return `${achievementIndex * 0.05}s`;
+  }
+
+  toggleActive(index: number) {
+    this.activeIndex = this.activeIndex === index ? null : index;
   }
 }

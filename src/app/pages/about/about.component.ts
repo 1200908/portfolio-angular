@@ -12,7 +12,7 @@ export class AboutComponent {
   constructor(private router: Router) { }
   goToEducation() {
     this.router.navigate(['/']).then(() => {
-      const el = document.getElementById('containers-principal');
+      const el = document.getElementById('container-principals');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
   }}
