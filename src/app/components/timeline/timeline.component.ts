@@ -34,8 +34,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       color: '#667eea',
       achievements: [
         'First programming course',
-        'Built first web app',
-        'Learned Java basics'
+        'Object-oriented programming concepts',
+        'Code structuring and best practices'
       ]
     },
     {
@@ -46,35 +46,35 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       icon: '💻',
       color: '#a0e8cd',
       achievements: [
-        'Spring Boot mastery',
+        'Spring Boot ',
         'Docker deployment',
-        'PostgreSQL optimization'
+        'PostgreSQL '
       ]
     },
     {
       year: '2023',
-      title: 'Volunteering Experience',
-      organization: 'Byonritmos',
-      description: 'Event planning and logistics coordination',
-      icon: '🤝',
+      title: 'Mobile Application Development',
+      organization: 'Academic / Personal Project',
+      description: 'Design and development of a cross-platform mobile application, focusing on performance, usability, and clean architecture.',
+      icon: '📱',
       color: '#f093fb',
       achievements: [
-        'Team leadership',
-        'Project management',
-        'Communication skills'
+        'Android/React Native ',
+        'REST API integration',
+        'UI/UX design for mobile'
       ]
     },
     {
-      year: '2024',
-      title: 'Cloud & DevOps',
-      organization: 'Personal Projects',
-      description: 'AWS deployment, CI/CD pipelines, and infrastructure as code',
-      icon: '☁️',
-      color: '#4facfe',
+      year: '2023-2025',
+      title: 'Volunteering Experience',
+      organization: 'Byonritmos/IPDJ',
+      description: 'Participation in youth volunteering initiatives, including environmental projects and event planning',
+      icon: '🤝',
+      color: '#b093fb',
       achievements: [
-        'AWS EC2/ECR',
-        'CodeBuild pipelines',
-        'Docker orchestration'
+        'Team collaboration ',
+        'Community and environmental engagement',
+        'Communication skills'
       ]
     },
     {
@@ -83,11 +83,24 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       organization: 'Fashable',
       description: 'Selenium automation and web scraping with Python',
       icon: '🚀',
-      color: '#43e97b',
+      color: '#4facfe',
       achievements: [
         'Selenium + Scrapy',
         'Data classification',
         'Tool optimization'
+      ]
+    },
+    {
+      year: '2025',
+      title: 'Cloud & DevOps',
+      organization: 'Personal Projects',
+      description: 'AWS deployment, CI/CD pipelines, and infrastructure as code',
+      icon: '☁️',
+      color: '#43e97b',
+      achievements: [
+        'AWS EC2/ECR',
+        'CodeBuild pipelines',
+        'Docker orchestration'
       ]
     }
   ];

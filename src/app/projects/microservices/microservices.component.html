@@ -1,26 +1,234 @@
 <div class="project-detail-container">
-  <h1>Library Management System</h1>
-  <h3>ISEP - Academic Project</h3>
+  <!-- Hero Section -->
+  <section class="project-hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="hero-content-wrapper">
+      <a routerLink="/" class="back-button">
+        <i class="fa fa-arrow-left"></i> Back to Home
+      </a>
 
-  <p>Academic project developed for two complementary courses, aiming to build a distributed library management system.</p>
+      <div class="project-hero-text">
+        <span class="project-year">2025</span>
+        <h1 class="project-hero-title">Java Microservices Manager</h1>
+        <p class="project-hero-subtitle"> · <span #typedElement></span></p>
 
-  <h4>Backend API:</h4>
-  <p>Java, Spring Boot, JWT, JPA, PostgreSQL, Kafka</p>
+        <div class="project-hero-tags">
+          <span class="hero-tag">Java</span>
+          <span class="hero-tag">Spring Boot</span>
+          <span class="hero-tag">Spring Cloud</span>
+          <span class="hero-tag">Eureka</span>
+          <span class="hero-tag">Docker</span>
+          <span class="hero-tag">CQRS</span>
+          <span class="hero-tag">JUnit</span>
+        </div>
 
-  <h4>Frontend:</h4>
-  <p>Android App: Java, Android Studio</p>
-  <p>React Mobile App: React</p>
+      </div>
+    </div>
+  </section>
 
-  <h4>Main Features & Technical Highlights:</h4>
-  <ul>
-    <li>Backend API built with Spring Boot, leveraging JPA for persistence and Kafka for asynchronous messaging between services.</li>
-    <li>User authentication and registration with JWT for secure token-based login.</li>
-    <li>Management of books, genres, and loans using CQRS pattern and database-per-service architecture.</li>
-    <li>Android application (Java, Android Studio) with responsive UI.</li>
-    <li>React mobile app for cross-platform access, connecting securely to backend APIs via REST endpoints.</li>
-  </ul>
+  <!-- Main Content -->
+  <div class="project-content-wrapper">
+    <!-- Overview Section -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-info-circle"></i> Project Overview
+      </h2>
+      <p class="overview-text">
+        A personal project built to demonstrate a robust, modular, and scalable microservices architecture using Java and Spring Boot.
+        The system leverages centralized configuration management with Spring Cloud Config, dynamic service discovery via Eureka, and a unified API Gateway for streamlined request routing.
+      </p>
+      <p class="overview-text">
+        The project also integrates Spring Mail for automated notifications and employs architectural patterns such as CQRS and database-per-service to ensure modularity, autonomy, and clear data boundaries between services.
+        Automated testing with JUnit reinforces reliability and maintainability.
+      </p>
+    </section>
 
-  <h4>Screenshots</h4>
-  <img src="assets/image1.png" alt="Login" class="project-screenshot">
-  <img src="assets/image2.png" alt="Menu" class="project-screenshot">
+    <!-- Architecture Section -->
+    <section class="content-section architecture-section">
+      <h2 class="section-heading">
+        <i class="fa fa-sitemap"></i> System Architecture
+      </h2>
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="arch-icon backend">
+            <i class="fa fa-server"></i>
+          </div>
+          <h3>Microservices Backend</h3>
+          <p>Modular Spring Boot services with Dockerized databases</p>
+          <ul class="tech-list">
+            <li>Java & Spring Boot</li>
+            <li>Spring Cloud Config</li>
+            <li>API Gateway & Eureka Service Registry</li>
+            <li>Database-per-service pattern</li>
+            <li>CQRS for read/write separation</li>
+            <li>Spring Mail for notifications</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-icon web">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <h3>Deployment & Operations</h3>
+          <p>Containerized deployment and CI/CD integration</p>
+          <ul class="tech-list">
+            <li>Docker for services and databases</li>
+            <li>Automated testing with JUnit</li>
+            <li>Modular microservice design</li>
+            <li>Easy scalability and maintainability</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Highlights -->
+    <section class="content-section tech-highlights-section">
+      <h2 class="section-heading">
+        <i class="fa fa-cogs"></i> Technical Highlights
+      </h2>
+      <div class="highlight-list">
+        <div class="highlight-item">
+          <div class="highlight-number">01</div>
+          <div class="highlight-content">
+            <h3>Centralized Configuration</h3>
+            <p>Spring Cloud Config allows managing configurations across all microservices from a single location.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">02</div>
+          <div class="highlight-content">
+            <h3>Dynamic Service Discovery</h3>
+            <p>Eureka Service Registry enables resilient and automatic discovery of microservices endpoints.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">03</div>
+          <div class="highlight-content">
+            <h3>Unified API Gateway</h3>
+            <p>Centralized gateway routes requests efficiently while adding a layer of security and monitoring.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">04</div>
+          <div class="highlight-content">
+            <h3>Automated Testing</h3>
+            <p>JUnit tests ensure service reliability and facilitate long-term maintainability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges & Solutions -->
+    <section class="content-section challenges-section">
+      <h2 class="section-heading">
+        <i class="fa fa-exclamation-triangle"></i> Challenges & Solutions
+      </h2>
+      <div class="challenges-grid">
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-random"></i>
+          </div>
+          <h3>Service Coordination</h3>
+          <p><strong>Challenge:</strong> Coordinating multiple microservices with independent databases.</p>
+          <p><strong>Solution:</strong> Implemented CQRS and database-per-service patterns along with automated event-driven communication where appropriate.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-lock"></i>
+          </div>
+          <h3>Configuration Management</h3>
+          <p><strong>Challenge:</strong> Keeping consistent configurations across multiple services.</p>
+          <p><strong>Solution:</strong> Centralized all configurations using Spring Cloud Config for easier maintenance and updates.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <h3>Notification Automation</h3>
+          <p><strong>Challenge:</strong> Ensuring users are notified of important events without manual intervention.</p>
+          <p><strong>Solution:</strong> Integrated Spring Mail module for automated email notifications triggered by service events.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section class="content-section outcomes-section">
+      <h2 class="section-heading">
+        <i class="fa fa-trophy"></i> Project Outcomes
+      </h2>
+      <div class="outcomes-grid">
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-server"></i>
+          </div>
+          <div class="stat-number">Modular</div>
+          <div class="stat-label">Microservices Architecture</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <div class="stat-number">Scalable</div>
+          <div class="stat-label">System Design</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-check-circle"></i>
+          </div>
+          <div class="stat-number">Automated</div>
+          <div class="stat-label">Email Notifications</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-database"></i>
+          </div>
+          <div class="stat-number">Dockerized</div>
+          <div class="stat-label">Deployment with Docker</div>
+        </div>
+      </div>
+
+      <ul class="outcome-list">
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Implemented modular microservices architecture following best practices in Spring Boot and Spring Cloud.</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Centralized configuration management and dynamic service discovery ensured resilience and maintainability.</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Automated email notifications via Spring Mail improved system interaction and monitoring.</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Containerized services and databases with Docker simplified deployment and scalability.</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="project-cta">
+    <div class="cta-content">
+      <h2>Explore More Projects</h2>
+      <p>Check out my other work or view my complete profile</p>
+      <div class="cta-buttons">
+        <a (click)="goToHome()" class="cta-btn primary">
+          <i class="fa fa-arrow-left"></i> View All Projects
+        </a>
+        <a (click)="goToAbout()" class="cta-btn secondary">
+          <i class="fa fa-user"></i> Full Profile
+        </a>
+      </div>
+    </div>
+  </section>
 </div>

@@ -1,26 +1,411 @@
 <div class="project-detail-container">
-  <h1>Library Management System</h1>
-  <h3>ISEP - Academic Project</h3>
+  <!-- Hero Section -->
+  <section class="project-hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="hero-content-wrapper">
+      <a routerLink="/" class="back-button">
+        <i class="fa fa-arrow-left"></i> Back to Home
+      </a>
 
-  <p>Academic project developed for two complementary courses, aiming to build a distributed library management system.</p>
+      <div class="project-hero-text" >
+        <span class="project-year">2023-2024</span>
+        <h1 class="project-hero-title">Library Management System</h1>
+        <p class="project-hero-subtitle"> · <span #typedElement></span> </p>
 
-  <h4>Backend API:</h4>
-  <p>Java, Spring Boot, JWT, JPA, PostgreSQL, Kafka</p>
+        <div class="project-hero-tags">
+          <span class="hero-tag">Java</span>
+          <span class="hero-tag">Spring Boot</span>
+          <span class="hero-tag">RabbitMQ</span>
+          <span class="hero-tag">Android</span>
+          <span class="hero-tag">ReactNative</span>
+          <span class="hero-tag">PostgreSQL</span>
+          <span class="hero-tag">Swagger</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h4>Frontend:</h4>
-  <p>Android App: Java, Android Studio</p>
-  <p>React Mobile App: React</p>
+  <!-- Main Content -->
+  <div class="project-content-wrapper">
+    <!-- Overview Section -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-info-circle"></i> Project Overview
+      </h2>
+      <p class="overview-text">
+        Academic project developed for two complementary courses at ISEP, aiming to build a comprehensive distributed library management system.
+        The project demonstrates mastery of modern software architecture patterns, including microservices, CQRS, and event-driven design with RabbitMQ.
+        Full API documentation is available via <a href="http://16.171.12.82:8090/public/swagger-ui/index.html" target="_blank">Swagger</a>.
+      </p>
+      <p class="overview-text">
+        The system was designed to handle complex library operations including book management, user authentication, loan tracking,
+        and genre categorization, all while maintaining data consistency across multiple services.
+      </p>
+      <p class="overview-text">
+        The frontend was developed for mobile platforms using Java for Android and React Native for cross-platform accessibility.
+      </p>
+    </section>
 
-  <h4>Main Features & Technical Highlights:</h4>
-  <ul>
-    <li>Backend API built with Spring Boot, leveraging JPA for persistence and Kafka for asynchronous messaging between services.</li>
-    <li>User authentication and registration with JWT for secure token-based login.</li>
-    <li>Management of books, genres, and loans using CQRS pattern and database-per-service architecture.</li>
-    <li>Android application (Java, Android Studio) with responsive UI.</li>
-    <li>React mobile app for cross-platform access, connecting securely to backend APIs via REST endpoints.</li>
-  </ul>
+    <!-- Architecture Section -->
+    <section class="content-section architecture-section">
+      <h2 class="section-heading">
+        <i class="fa fa-sitemap"></i> System Architecture
+      </h2>
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="arch-icon backend">
+            <i class="fa fa-server"></i>
+          </div>
+          <h3>Backend API</h3>
+          <p>Spring Boot microservices with database-per-service pattern</p>
+          <ul class="tech-list">
+            <li>Java & Spring Boot</li>
+            <li>JWT Authentication</li>
+            <li>JPA for ORM</li>
+            <li>PostgreSQL Database</li>
+            <li>RabbitMQ</li>
+            <li>Swagger</li>
+          </ul>
+        </div>
 
-  <h4>Screenshots</h4>
-  <img src="assets/image1.png" alt="Login" class="project-screenshot">
-  <img src="assets/image2.png" alt="Menu" class="project-screenshot">
+        <div class="arch-card">
+          <div class="arch-icon mobile">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <h3>Android App</h3>
+          <p>Native mobile application for android</p>
+          <ul class="tech-list">
+            <li>Java</li>
+            <li>Android Studio</li>
+            <li>Material Design</li>
+            <li>REST API Integration</li>
+            <li>Modern UI/UX</li>
+
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-icon web">
+            <i class="fa fa-code"></i>
+          </div>
+          <h3>ReactNative App</h3>
+          <p>Cross-platform solution for wider accessibility</p>
+          <ul class="tech-list">
+            <li>ReactNative</li>
+            <li>Responsive Design</li>
+            <li>REST API Integration</li>
+            <li>Modern UI/UX</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-star"></i> Key Features
+      </h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-lock"></i>
+          </div>
+          <h3>Secure Authentication</h3>
+          <p>User registration and login with JWT token-based authentication, ensuring secure access control across all services.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-book"></i>
+          </div>
+          <h3>Book Management</h3>
+          <p>Complete CRUD operations for books with genre categorization, search functionality, and detailed metadata management.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-book"></i>
+          </div>
+          <h3>System Documentation</h3>
+          <p>Full API documentation available on <a href="http://16.171.12.82:8090/public/swagger-ui/index.html" target="_blank">Swagger.</a></p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-bolt"></i>
+          </div>
+          <h3>Event-Driven Architecture</h3>
+          <p>RabbitMQ-based messaging for asynchronous communication between microservices, ensuring scalability and resilience.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-database"></i>
+          </div>
+          <h3>CQRS Pattern</h3>
+          <p>Separation of read and write operations for optimized performance and better data consistency management.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <h3>Multi-Platform Access</h3>
+          <p>Both Android native and React mobile applications providing seamless user experience across devices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Highlights -->
+    <section class="content-section tech-highlights-section">
+      <h2 class="section-heading">
+        <i class="fa fa-cogs"></i> Technical Highlights
+      </h2>
+      <div class="highlight-list">
+        <div class="highlight-item">
+          <div class="highlight-number">01</div>
+          <div class="highlight-content">
+            <h3>Microservices Architecture</h3>
+            <p>Backend API built with Spring Boot, leveraging database-per-service architecture for independent scalability and maintenance.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">02</div>
+          <div class="highlight-content">
+            <h3>Asynchronous Messaging</h3>
+            <p>RabbitMQ integration for event-driven communication, enabling loose coupling and improved system resilience.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">03</div>
+          <div class="highlight-content">
+            <h3>Data Persistence</h3>
+            <p>JPA (Java Persistence API) for elegant object-relational mapping with PostgreSQL as the primary database.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">04</div>
+          <div class="highlight-content">
+            <h3>Dual Mobile Solutions</h3>
+            <p>Native Android app for optimal performance and React mobile app for cross-platform compatibility.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="content-section screenshots-section">
+      <h2 class="section-heading">
+        <i class="fa fa-picture-o"></i> Application Screenshots
+      </h2>
+      <p class="screenshots-hint">Click on any image to view in fullscreen</p>
+
+      <div class="screenshots-grid">
+        <div class="screenshot-card" (click)="openImageModal('assets/image1.png', 'Login Screen Android')">
+          <div class="screenshot-wrapper">
+            <img src="assets/image1.png" alt="Login Screen" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Login Screen (Android)</h4>
+            <p>Secure authentication interface with JWT token management</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_1.jpg', 'RegistUser Android')">
+          <div class="screenshot-wrapper">
+            <img src="assets/Screenshot_Library_1.jpg" alt="Main Menu" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Register User (Android)</h4>
+            <p>Registration page with name, email, phone ...etc and frontend validations</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card" (click)="openImageModal('assets/image2.png', 'Librarian Menu Android')">
+          <div class="screenshot-wrapper">
+            <img src="assets/image2.png" alt="Book Catalog" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Librarian Menu (Android)</h4>
+            <p>Main menu for users with Librarian role, showing role-specific options</p>
+          </div>
+        </div>
+        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_4.jpg', 'Reader Menu Android')">
+          <div class="screenshot-wrapper">
+            <img src="assets/Screenshot_Library_4.jpg" alt="Loan Management" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Reader Menu (Android)</h4>
+            <p>Main menu for users with Reader role, showing lending and browsing options</p>
+          </div>
+        </div>
+        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_5.jpg', 'Book Details Android')">
+          <div class="screenshot-wrapper">
+            <img src="assets/Screenshot_Library_5.jpg" alt="Loan Management" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Book Details (Android)</h4>
+            <p>Detailed view of a book including author, genre, availability, and other metadata</p>
+          </div>
+        </div>
+        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_6.png', 'Login Screen React Native')">
+          <div class="screenshot-wrapper">
+            <img src="assets/Screenshot_Library_6.png" alt="Loan Management" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Main Menu (React Native)</h4>
+            <p>Main dashboard interface for React Native frontend, showing login options</p>
+          </div>
+        </div>
+        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_7.png', 'Librarian Menu React Native')">
+          <div class="screenshot-wrapper">
+            <img src="assets/Screenshot_Library_7.png" alt="Loan Management" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Librarian Menu (React Native)</h4>
+            <p>obile interface for Librarian role, demonstrating cross-platform design with React Native</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenges & Solutions -->
+    <section class="content-section challenges-section">
+      <h2 class="section-heading">
+        <i class="fa fa-exclamation-triangle"></i> Challenges & Solutions
+      </h2>
+      <div class="challenges-grid">
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-random"></i>
+          </div>
+          <h3>Distributed Data Consistency</h3>
+          <p><strong>Challenge:</strong> Maintaining data consistency across multiple microservices with separate databases.</p>
+          <p><strong>Solution:</strong> Implemented event sourcing with RabbitMQ and eventual consistency patterns, along with saga orchestration for distributed transactions.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-users"></i>
+          </div>
+          <h3>Concurrent Loan Operations</h3>
+          <p><strong>Challenge:</strong> Handling simultaneous loan requests for the same book without overbooking.</p>
+          <p><strong>Solution:</strong> Implemented optimistic locking with version control and queue-based processing for loan requests.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <h3>Cross-Platform Compatibility</h3>
+          <p><strong>Challenge:</strong> Providing consistent user experience across Android and React platforms.</p>
+          <p><strong>Solution:</strong> Designed RESTful API with comprehensive documentation and shared UI/UX patterns between platforms.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section class="content-section outcomes-section">
+      <h2 class="section-heading">
+        <i class="fa fa-trophy"></i> Project Outcomes
+      </h2>
+      <div class="outcomes-grid">
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-check-circle"></i>
+          </div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Functional Requirements Met</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-server"></i>
+          </div>
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Microservices Deployed</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <div class="stat-number">2</div>
+          <div class="stat-label">Mobile Platforms</div>
+        </div>
+
+      </div>
+
+      <ul class="outcome-list">
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Successfully implemented all core library management features including book cataloging, user management, and loan tracking</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Achieved seamless integration between multiple microservices using event-driven architecture with RabbitMQ</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Delivered both Android and React mobile applications with consistent functionality and user experience</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Demonstrated proficiency in modern software development practices including CQRS, microservices, and distributed systems</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Full API documentation available on <a href="http://16.171.12.82:8090/public/swagger-ui/index.html" target="_blank">Swagger</a></span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="project-cta">
+    <div class="cta-content">
+      <h2>Explore More Projects</h2>
+      <p>Check out my other work or view my complete profile</p>
+      <div class="cta-buttons">
+        <a (click)="goToHome()" class="cta-btn primary">
+          <i class="fa fa-arrow-left"></i> View All Projects
+        </a>
+        <a (click)="goToAbout()" class="cta-btn secondary">
+          <i class="fa fa-user"></i> Full Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="image-modal" [class.active]="isModalOpen" (click)="closeImageModal()">
+    <div class="modal-content">
+      <img [src]="modalImageSrc" [alt]="modalImageTitle" class="modal-image">
+      <div class="modal-caption">{{ modalImageTitle }} <i class="fa fa-times"></i> </div>
+    </div>
+  </div>
+
 </div>

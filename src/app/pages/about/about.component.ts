@@ -15,4 +15,5 @@ export class AboutComponent {
       const el = document.getElementById('container-principals');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
-  }}
+  }
+}

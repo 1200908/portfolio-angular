@@ -1,26 +1,307 @@
 <div class="project-detail-container">
-  <h1>Library Management System</h1>
-  <h3>ISEP - Academic Project</h3>
+  <!-- Hero Section -->
+  <section class="project-hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="hero-content-wrapper">
+      <a routerLink="/" class="back-button">
+        <i class="fa fa-arrow-left"></i> Back to Home
+      </a>
 
-  <p>Academic project developed for two complementary courses, aiming to build a distributed library management system.</p>
+      <div class="project-hero-text">
+        <span class="project-year">2025</span>
+        <h1 class="project-hero-title">Frontend Portfolio</h1>
+        <p class="project-hero-subtitle"> · <span #typedElement></span> </p>
 
-  <h4>Backend API:</h4>
-  <p>Java, Spring Boot, JWT, JPA, PostgreSQL, Kafka</p>
+        <div class="project-hero-tags">
+          <span class="hero-tag">HTML5</span>
+          <span class="hero-tag">CSS3</span>
+          <span class="hero-tag">Flexbox</span>
+          <span class="hero-tag">Grid</span>
+          <span class="hero-tag">Responsive Design</span>
+          <span class="hero-tag">Angular</span>
+        </div>
 
-  <h4>Frontend:</h4>
-  <p>Android App: Java, Android Studio</p>
-  <p>React Mobile App: React</p>
+        <div class="project-hero-buttons">
+          <a href="https://github.com/1200908/portfolio-angular" target="_blank" class="hero-btn btn-github">
+            <i class="fa fa-github"></i> View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h4>Main Features & Technical Highlights:</h4>
-  <ul>
-    <li>Backend API built with Spring Boot, leveraging JPA for persistence and Kafka for asynchronous messaging between services.</li>
-    <li>User authentication and registration with JWT for secure token-based login.</li>
-    <li>Management of books, genres, and loans using CQRS pattern and database-per-service architecture.</li>
-    <li>Android application (Java, Android Studio) with responsive UI.</li>
-    <li>React mobile app for cross-platform access, connecting securely to backend APIs via REST endpoints.</li>
-  </ul>
+  <!-- Main Content -->
+  <div class="project-content-wrapper">
+    <!-- Project Overview -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-info-circle"></i> Project Overview
+      </h2>
+      <p class="overview-text">
+        This project focuses on building a responsive and interactive web interface using modern HTML5, CSS3, and Flexbox/Grid layouts.
+        Emphasis is placed on semantic markup, cross-browser compatibility, and creating a user-friendly experience.
+      </p>
+      <p class="overview-text">
+        The portfolio demonstrates clean and maintainable code, flexible layouts, and the ability to integrate with backend APIs in the future.
+      </p>
+    </section>
 
-  <h4>Screenshots</h4>
-  <img src="assets/image1.png" alt="Login" class="project-screenshot">
-  <img src="assets/image2.png" alt="Menu" class="project-screenshot">
+    <!-- System Architecture -->
+    <section class="content-section architecture-section">
+      <h2 class="section-heading">
+        <i class="fa fa-sitemap"></i> System Architecture
+      </h2>
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="arch-icon web">
+            <i class="fa fa-code"></i>
+          </div>
+          <h3>Frontend</h3>
+          <p>Angular-based SPA focusing on responsive and interactive UI</p>
+          <ul class="tech-list">
+            <li>Angular Framework</li>
+            <li>HTML5 Semantic Markup</li>
+            <li>CSS3 & Flexbox/Grid Layouts</li>
+            <li>Cross-browser Compatibility</li>
+            <li>Interactive Components</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-icon cloud">
+            <i class="fa fa-desktop"></i>
+          </div>
+          <h3>Deployment</h3>
+          <p>Static hosting ready for integration with backend APIs</p>
+          <ul class="tech-list">
+            <li>Angular CLI Build</li>
+            <li>Static Hosting (optional: Firebase/GitHub Pages)</li>
+            <li>Responsive Design for All Screen Sizes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-star"></i> Key Features
+      </h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-desktop"></i>
+          </div>
+          <h3>Responsive Layout</h3>
+          <p>UI adapts seamlessly to mobile, tablet, and desktop screens using Flexbox and Grid.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-magic"></i>
+          </div>
+          <h3>Interactive Components</h3>
+          <p>Custom animations and hover effects enhance the user experience across the portfolio.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-code"></i>
+          </div>
+          <h3>Semantic Markup</h3>
+          <p>HTML5 semantic structure ensures accessibility and maintainability for future updates.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <h3>Extensible Design</h3>
+          <p>Easy to integrate with backend APIs or dynamic content in future development phases.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Highlights -->
+    <section class="content-section tech-highlights-section">
+      <h2 class="section-heading">
+        <i class="fa fa-cogs"></i> Technical Highlights
+      </h2>
+      <div class="highlight-list">
+        <div class="highlight-item">
+          <div class="highlight-number">01</div>
+          <div class="highlight-content">
+            <h3>Responsive Design</h3>
+            <p>Layouts adapt seamlessly to all screen sizes using Flexbox, Grid, and media queries.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">02</div>
+          <div class="highlight-content">
+            <h3>Interactive UI</h3>
+            <p>Custom animations and hover effects enhance usability without sacrificing performance.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">03</div>
+          <div class="highlight-content">
+            <h3>Semantic HTML</h3>
+            <p>HTML5 semantic structure ensures accessibility, SEO optimization, and maintainable code.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">04</div>
+          <div class="highlight-content">
+            <h3>Extensible Architecture</h3>
+            <p>The design allows for easy future integration with backend APIs or dynamic content.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frontend Screenshot -->
+    <section class="content-section screenshots-section">
+      <h2 class="section-heading">
+        <i class="fa fa-picture-o"></i> Frontend Screenshot
+      </h2>
+      <p class="screenshots-hint">Click on any image to view in fullscreen</p>
+
+      <div class="screenshots-grid">
+        <div class="screenshot-card" (click)="openImageModal('assets/pic_portfolio.png', 'Portfolio Screen')">
+          <div class="screenshot-wrapper">
+            <img src="assets/pic_portfolio.png" alt="Login Screen" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Portfolio Home</h4>
+            <p>Clean, responsive landing page showcasing projects and skills.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Challenges & Solutions -->
+    <section class="content-section challenges-section">
+      <h2 class="section-heading">
+        <i class="fa fa-exclamation-triangle"></i> Challenges & Solutions
+      </h2>
+      <div class="challenges-grid">
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <h3>Responsive Design</h3>
+          <p><strong>Challenge:</strong> Ensuring a consistent look across devices with different screen sizes.</p>
+          <p><strong>Solution:</strong> Used CSS Grid and Flexbox layouts with media queries for mobile-first design.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-magic"></i>
+          </div>
+          <h3>Interactive UI</h3>
+          <p><strong>Challenge:</strong> Making UI components visually appealing while maintaining performance.</p>
+          <p><strong>Solution:</strong> Implemented smooth CSS transitions and animations, keeping DOM operations minimal.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-universal-access"></i>
+          </div>
+          <h3>Accessibility</h3>
+          <p><strong>Challenge:</strong> Creating a portfolio that follows semantic HTML best practices.</p>
+          <p><strong>Solution:</strong> Used proper headings, ARIA roles, and semantic tags to improve accessibility and SEO.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Outcomes -->
+    <section class="content-section outcomes-section">
+      <h2 class="section-heading">
+        <i class="fa fa-trophy"></i> Project Outcomes
+      </h2>
+      <div class="outcomes-grid">
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-check-circle"></i>
+          </div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Responsive Pages</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-code"></i>
+          </div>
+          <div class="stat-number">CSS3</div>
+          <div class="stat-label">Modern Techniques</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <div class="stat-number">Adaptive</div>
+          <div class="stat-label">All Devices</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-smile-o"></i>
+          </div>
+          <div class="stat-number">UX</div>
+          <div class="stat-label">Enhanced Experience</div>
+        </div>
+      </div>
+
+      <ul class="outcome-list">
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Fully responsive Angular frontend adapting to any screen size</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Interactive UI components and smooth animations for better user engagement</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Semantic HTML5 markup ensuring accessibility and maintainability</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Design is easily extendable for future backend API integration</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="project-cta">
+    <div class="cta-content">
+      <h2>Explore More Projects</h2>
+      <p>Check out my other work or view my complete profile</p>
+      <div class="cta-buttons">
+        <a (click)="goToHome()" class="cta-btn primary">
+          <i class="fa fa-arrow-left"></i> View All Projects
+        </a>
+        <a (click)="goToAbout()" class="cta-btn secondary">
+          <i class="fa fa-user"></i> Full Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="image-modal" [class.active]="isModalOpen" (click)="closeImageModal()">
+    <div class="modal-content">
+      <img [src]="modalImageSrc" [alt]="modalImageTitle" class="modal-image">
+      <div class="modal-caption">{{ modalImageTitle }} <i class="fa fa-times"></i> </div>
+    </div>
+  </div>
+
 </div>

@@ -32,4 +32,11 @@ export class NavbarComponent {
     });
   }
 
+  goToJourney() {
+    this.router.navigate(['/']).then(() => {
+      const el = document.getElementById('journey');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
 }

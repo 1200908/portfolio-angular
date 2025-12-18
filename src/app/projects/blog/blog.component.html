@@ -1,26 +1,333 @@
 <div class="project-detail-container">
-  <h1>Library Management System</h1>
-  <h3>ISEP - Academic Project</h3>
+  <!-- Hero Section -->
+  <section class="project-hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="hero-content-wrapper">
+      <a routerLink="/" class="back-button">
+        <i class="fa fa-arrow-left"></i> Back to Home
+      </a>
 
-  <p>Academic project developed for two complementary courses, aiming to build a distributed library management system.</p>
+      <div class="project-hero-text">
+        <span class="project-year">2025</span>
+        <h1 class="project-hero-title">Auto-Generated Blog</h1>
+        <p class="project-hero-subtitle"> · <span #typedElement></span> </p>
 
-  <h4>Backend API:</h4>
-  <p>Java, Spring Boot, JWT, JPA, PostgreSQL, Kafka</p>
+        <div class="project-hero-tags">
+          <span class="hero-tag">React</span>
+          <span class="hero-tag">Node.js</span>
+          <span class="hero-tag">PostgreSQL</span>
+          <span class="hero-tag">Docker</span>
+          <span class="hero-tag">AWS EC2</span>
+          <span class="hero-tag">AWS ECR</span>
+          <span class="hero-tag">AWS CodeBuild</span>
+        </div>
 
-  <h4>Frontend:</h4>
-  <p>Android App: Java, Android Studio</p>
-  <p>React Mobile App: React</p>
+        <div class="project-hero-buttons">
+          <a href="https://github.com/1200908/Auto-Generated-Blog" target="_blank" class="hero-btn btn-github">
+            <i class="fa fa-github"></i> View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h4>Main Features & Technical Highlights:</h4>
-  <ul>
-    <li>Backend API built with Spring Boot, leveraging JPA for persistence and Kafka for asynchronous messaging between services.</li>
-    <li>User authentication and registration with JWT for secure token-based login.</li>
-    <li>Management of books, genres, and loans using CQRS pattern and database-per-service architecture.</li>
-    <li>Android application (Java, Android Studio) with responsive UI.</li>
-    <li>React mobile app for cross-platform access, connecting securely to backend APIs via REST endpoints.</li>
-  </ul>
+  <!-- Main Content -->
+  <div class="project-content-wrapper">
+    <!-- Overview Section -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-info-circle"></i> Project Overview
+      </h2>
+      <p class="overview-text">
+        This project is a full-stack auto-generated blog built as a technical challenge. The frontend is built with React and communicates with a Node.js backend that stores articles in PostgreSQL. Both services are containerized using Docker and deployed on an AWS EC2 instance.
+      </p>
+      <p class="overview-text">
+        The backend generates articles automatically using a free AI API. The project demonstrates modern full-stack development practices, including containerization, CI/CD pipelines, and cloud deployment.
+      </p>
+    </section>
 
-  <h4>Screenshots</h4>
-  <img src="assets/image1.png" alt="Login" class="project-screenshot">
-  <img src="assets/image2.png" alt="Menu" class="project-screenshot">
+    <section class="content-section architecture-section">
+      <h2 class="section-heading">
+        <i class="fa fa-sitemap"></i> System Architecture
+      </h2>
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="arch-icon backend">
+            <i class="fa fa-server"></i>
+          </div>
+          <h3>Backend API</h3>
+          <p>Node.js service for automatic article generation and API endpoints</p>
+          <ul class="tech-list">
+            <li>Node.js & Express</li>
+            <li>PostgreSQL Database</li>
+            <li>Dockerized Service</li>
+            <li>AWS EC2 Deployment</li>
+            <li>CI/CD via AWS CodeBuild & ECR</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-icon web">
+            <i class="fa fa-code"></i>
+          </div>
+          <h3>Frontend</h3>
+          <p>React frontend to list articles and show full content</p>
+          <ul class="tech-list">
+            <li>React.js</li>
+            <li>REST API Integration</li>
+            <li>Responsive Design</li>
+            <li>Dockerized Service</li>
+            <li>Hosted on AWS EC2</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-icon cloud">
+            <i class="fa fa-cloud"></i>
+          </div>
+          <h3>Deployment</h3>
+          <p>Fully containerized and deployed on AWS</p>
+          <ul class="tech-list">
+            <li>Docker Compose</li>
+            <li>AWS EC2 Public Access</li>
+            <li>AWS ECR & CodeBuild CI/CD</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="content-section">
+      <h2 class="section-heading">
+        <i class="fa fa-star"></i> Key Features
+      </h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-list"></i>
+          </div>
+          <h3>Article Listing</h3>
+          <p>List all articles with full content reading functionality in a clean, responsive frontend.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <h3>Automatic Article Generation</h3>
+          <p>The backend generates articles daily using a free AI API to populate content automatically.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-cubes"></i>
+          </div>
+          <h3>Containerized Deployment</h3>
+          <p>Frontend and backend are Dockerized for easy deployment and scalability.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fa fa-cloud"></i>
+          </div>
+          <h3>AWS Deployment & CI/CD</h3>
+          <p>CI/CD pipeline built using AWS CodeBuild and ECR; deployed on EC2 with public access.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Highlights -->
+    <section class="content-section tech-highlights-section">
+      <h2 class="section-heading">
+        <i class="fa fa-cogs"></i> Technical Highlights
+      </h2>
+      <div class="highlight-list">
+        <div class="highlight-item">
+          <div class="highlight-number">01</div>
+          <div class="highlight-content">
+            <h3>Full-Stack Architecture</h3>
+            <p>React frontend communicates with Node.js backend for full-stack functionality and API-driven design.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">02</div>
+          <div class="highlight-content">
+            <h3>Automated Content Generation</h3>
+            <p>Backend uses AI API to auto-generate blog articles, ensuring fresh content daily.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">03</div>
+          <div class="highlight-content">
+            <h3>Containerized Deployment</h3>
+            <p>Frontend and backend services are Dockerized, enabling easy deployment and replication across environments.</p>
+          </div>
+        </div>
+
+        <div class="highlight-item">
+          <div class="highlight-number">04</div>
+          <div class="highlight-content">
+            <h3>Cloud Infrastructure</h3>
+            <p>Deployed on AWS EC2 with automated CI/CD pipeline via CodeBuild and ECR for efficient delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="content-section screenshots-section">
+      <h2 class="section-heading">
+        <i class="fa fa-picture-o"></i> Frontend Screenshot
+      </h2>
+      <p class="screenshots-hint">Click on image to view in fullscreen</p>
+
+      <div class="screenshots-grid">
+        <div class="screenshot-card" (click)="openImageModal('assets/blog-frontend.png', 'React Interface - Main Page')">
+          <div class="screenshot-wrapper">
+            <img src="assets/blog-frontend.png" alt="Frontend Screenshot" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Frontend </h4>
+            <p>React interface showing the main dashboard for generating blog articles.</p>
+          </div>
+        </div>
+      </div>
+
+        <div class="screenshot-card" (click)="openImageModal('assets/blog-frontend-details.png', 'React Interface - Article Details')">
+          <div class="screenshot-wrapper">
+            <img src="assets/blog-frontend-details.png" alt="Frontend Screenshot" class="project-screenshot">
+            <div class="screenshot-overlay">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+          <div class="screenshot-caption">
+            <h4>Article Details</h4>
+            <p>React interface displaying the detailed view of a selected blog article.</p>
+          </div>
+        </div>
+
+    </section>
+
+    <section class="content-section challenges-section">
+      <h2 class="section-heading">
+        <i class="fa fa-exclamation-triangle"></i> Challenges & Solutions
+      </h2>
+      <div class="challenges-grid">
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-database"></i>
+          </div>
+          <h3>Automatic Article Generation</h3>
+          <p><strong>Challenge:</strong> Generating articles daily using an external AI API while maintaining data consistency.</p>
+          <p><strong>Solution:</strong> Built a scheduled Node.js service that requests the AI API, saves articles in PostgreSQL, and ensures no duplicates.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <h3>Deployment & CI/CD</h3>
+          <p><strong>Challenge:</strong> Containerizing both frontend and backend and deploying with automated CI/CD on AWS.</p>
+          <p><strong>Solution:</strong> Used Docker Compose for local setup, AWS ECR for container registry, and AWS CodeBuild for CI/CD pipeline to EC2.</p>
+        </div>
+
+        <div class="challenge-card">
+          <div class="challenge-icon">
+            <i class="fa fa-mobile"></i>
+          </div>
+          <h3>Cross-Service Communication</h3>
+          <p><strong>Challenge:</strong> Frontend must fetch articles from backend efficiently and handle API errors gracefully.</p>
+          <p><strong>Solution:</strong> Implemented Axios with proper error handling, loading states, and caching to improve UX.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section outcomes-section">
+      <h2 class="section-heading">
+        <i class="fa fa-trophy"></i> Project Outcomes
+      </h2>
+      <div class="outcomes-grid">
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-check-circle"></i>
+          </div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Feature Completion</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-server"></i>
+          </div>
+          <div class="stat-number">2</div>
+          <div class="stat-label">Services Deployed</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-database"></i>
+          </div>
+          <div class="stat-number">PostgreSQL</div>
+          <div class="stat-label">Database Used</div>
+        </div>
+
+        <div class="outcome-stat">
+          <div class="stat-icon">
+            <i class="fa fa-cloud"></i>
+          </div>
+          <div class="stat-number">AWS EC2</div>
+          <div class="stat-label">Hosting Platform</div>
+        </div>
+      </div>
+
+      <ul class="outcome-list">
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Automated daily article generation using AI API integrated with Node.js backend</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Full-stack deployment with Docker and CI/CD pipeline on AWS EC2</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Responsive React frontend displaying articles efficiently with API integration</span>
+        </li>
+        <li class="outcome-item">
+          <i class="fa fa-check"></i>
+          <span>Containerized architecture ensures scalability and easy maintainability</span>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- CTA Section -->
+  <section class="project-cta">
+    <div class="cta-content">
+      <h2>Explore More Projects</h2>
+      <p>Check out my other work or view my complete profile</p>
+      <div class="cta-buttons">
+        <a (click)="goToHome()" class="cta-btn primary">
+          <i class="fa fa-arrow-left"></i> View All Projects
+        </a>
+        <a (click)="goToAbout()" class="cta-btn secondary">
+          <i class="fa fa-user"></i> Full Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="image-modal" [class.active]="isModalOpen" (click)="closeImageModal()">
+    <div class="modal-content">
+      <img [src]="modalImageSrc" [alt]="modalImageTitle" class="modal-image">
+      <div class="modal-caption">{{ modalImageTitle }} <i class="fa fa-times"></i> </div>
+    </div>
+  </div>
+
 </div>

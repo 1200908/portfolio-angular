@@ -84,6 +84,22 @@
           <i class="fa fa-database"></i>
           <span>PostgreSQL</span>
         </div>
+        <div class="tech-item">
+          <i class="fa fa-envelope"></i>
+          <span>Broker</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-github"></i>
+          <span>Git</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-puzzle-piece"></i>
+          <span>Microservices</span>
+        </div>
+        <div class="tech-item">
+          <i class="fa fa-lock"></i>
+          <span>JWT</span>
+        </div>
       </div>
     </div>
   </section>
@@ -99,7 +115,7 @@
           <div class="project-image-container">
             <img [src]="project.image" [alt]="project.title" class="project-image">
             <div class="project-overlay">
-              <a [routerLink]="project.route" class="project-link">
+              <a (click)="goToProject(project.route)" class="project-link">
                 <i class="fa fa-arrow-right"></i>
               </a>
             </div>
@@ -115,7 +131,7 @@
               </span>
             </div>
 
-            <a [routerLink]="project.route" class="project-details-link">
+            <a (click)="goToProject(project.route)" class="project-details-link">
               View Details <i class="fa fa-arrow-right"></i>
             </a>
           </div>

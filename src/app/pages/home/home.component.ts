@@ -19,16 +19,8 @@ export class HomeComponent implements AfterViewInit {
       title: 'Library Management System',
       description: 'Distributed library management system with microservices architecture, JWT authentication, and multi-platform frontend (Android & React).',
       image: 'assets/img.png',
-      tags: ['Java', 'Spring Boot', 'Kafka', 'Android', 'React'],
+      tags: ['Java', 'Spring Boot', 'RabbitMQ', 'Android', 'React Native'],
       route: '/projects/library'
-    },
-    {
-      id: 'frontend-portfolio',
-      title: 'Frontend Portfolio',
-      description: 'Responsive and interactive web interface built with modern HTML5, CSS3, and Flexbox/Grid.',
-      image: 'assets/pic_portfolio.png',
-      tags: ['HTML5', 'CSS3', 'Flexbox', 'Grid', 'Responsive Design', 'Animations'],
-      route: '/projects/portfolio'
     },
     {
       id: 'auto-generated-blog',
@@ -37,6 +29,14 @@ export class HomeComponent implements AfterViewInit {
       image: 'assets/pic_blog.png',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Docker', 'AWS EC2', 'AWS ECR', 'AWS CodeBuild'],
       route: '/projects/blog'
+    },
+    {
+      id: 'frontend-portfolio',
+      title: 'Frontend Portfolio',
+      description: 'Responsive and interactive web interface built with modern HTML5, CSS3, and Flexbox/Grid.',
+      image: 'assets/pic_portfolio.png',
+      tags: ['Angular', 'TypeScript', 'Routing', 'Responsive Design','HTML5 / CSS3', 'Animations'],
+      route: '/projects/portfolio'
     },
     {
       id: 'java-microservices',
@@ -89,5 +89,12 @@ export class HomeComponent implements AfterViewInit {
         });
       }, 50);
     }
+  }
+
+  goToProject(route: string) {
+    this.router.navigate([route]).then(() => {
+      const el = document.getElementById('top');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
   }
 }

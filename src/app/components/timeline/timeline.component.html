@@ -1,7 +1,7 @@
-<section class="timeline-section">
+<section class="timeline-section" id="journey">
   <div class="container">
     <h2 class="title">My Journey</h2>
-    <p class="subtitle">From student to engineer - the path so far</p>
+    <p class="subtitle">From student to engineer</p>
 
     <div #timelineContainer class="timeline">
       <!-- Central line -->
@@ -25,7 +25,7 @@
           (mouseenter)="setActive(i)"
           (mouseleave)="clearActive()"
           (click)="toggleActive(i)">
-        >
+
           <!-- Card Header -->
           <div class="card-header">
             <span class="year" [style.color]="item.color">{{ item.year }}</span>
