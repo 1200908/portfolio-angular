@@ -536,6 +536,8 @@
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
+    margin-top: 100px;
+
   }
 
   .hero-subtitle {
