@@ -10,9 +10,16 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class AboutComponent {
   constructor(private router: Router) { }
-  goToEducation() {
+  goToHome() {
     this.router.navigate(['/']).then(() => {
       const el = document.getElementById('container-principals');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  goToProjects() {
+    this.router.navigate(['/']).then(() => {
+      const el = document.getElementById('projects');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
   }

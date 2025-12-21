@@ -365,6 +365,7 @@ section h2 {
 .footer-btn-container {
   text-align: center;
   margin: 60px 0 40px;
+  gap: 20px;
 }
 
 .btn-primary {
@@ -378,6 +379,9 @@ section h2 {
   display: inline-block;
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
   transition: all 0.3s ease;
+  gap: 10px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -398,6 +402,48 @@ section h2 {
     max-width: 100%;
   }
 }
+
+
+
+.lang-bar:hover {
+  opacity: 1;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateX(15px) scale(1.15);
+}
+
+.lang-fillpt {
+  height: 100%;
+  width: 0%; /* começa vazio */
+  background: #009688;
+  border-radius: 20px;
+  animation: fillBarPT 4s ease-in-out infinite alternate;
+}
+
+.lang-filleng {
+  height: 100%;
+  width: 0%; /* começa vazio */
+  background: #009688;
+  border-radius: 20px;
+  animation: fillBarENG 4s ease-in-out infinite alternate;
+}
+
+@keyframes fillBarPT {
+  0% {
+    width: 90%;
+  }
+  100% {
+    width: 100%; /* valor final da barra */
+  }
+}
+@keyframes fillBarENG {
+  0% {
+    width: 80%;
+  }
+  100% {
+    width: 93%; /* valor final da barra */
+  }
+}
+
 
 @media (max-width: 768px) {
   #container-principal {

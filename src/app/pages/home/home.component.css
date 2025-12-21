@@ -122,6 +122,7 @@
   margin-bottom: 1rem;
   line-height: 1.2;
   animation: fadeInUp 1s ease;
+  font-family: 'Fraunces', serif;
 }
 
 .name-highlight {
@@ -129,6 +130,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-family: 'Fascinate', cursive;
 }
 
 .hero-subtitle {
@@ -578,4 +580,42 @@
   .tech-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
+}
+
+.tech-item{
+  animation: pulse 10s infinite;
+}
+
+.hero-image {
+  animation: float 4s ease-in-out infinite alternate;
+}
+
+.project-card {
+  animation: floatup_down 20s ease-in-out infinite alternate;
+}
+
+.project-card:nth-child(even) {
+  animation-direction: alternate-reverse;
+  animation-delay: 2s;
+}
+
+.project-card:nth-child(3n) {
+  animation-delay: 4s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes floatup_down {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(-10px); }
 }

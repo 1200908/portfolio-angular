@@ -109,12 +109,12 @@
         <br>
         <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
         <p>Portuguese</p>
-        <div class="w3-light-grey w3-round-xlarge" style="border: 2px solid rgb(47, 65, 49);">
-          <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+        <div class="w3-light-grey w3-round-xlarge lang-bar " style="border: 2px solid rgb(47, 65, 49);">
+          <div class="w3-round-xlarge w3-teal lang-fillpt" style="height:24px;width:100%"></div>
         </div>
         <p>English</p>
-        <div class="w3-light-grey w3-round-xlarge" style="border: 2px solid rgb(47, 65, 49);">
-          <div class="w3-round-xlarge w3-teal" style="height:24px;width:90%"></div>
+        <div class="w3-light-grey w3-round-xlarge lang-bar" style="border: 2px solid rgb(47, 65, 49);">
+          <div class="w3-round-xlarge w3-teal lang-filleng" style="height:24px;width:90%"></div>
         </div>
         <br>
         </section>
@@ -207,9 +207,13 @@
   </div>
 
   <div class="footer-btn-container">
-    <button (click)="goToEducation()" class="btn-primary">
-      <i class="fa fa-user"></i> Voltar ao Início
-    </button>
+    <a (click)="goToHome()" class="btn-primary">
+      <i class="fa fa-arrow-left"></i> Back to Home
+    </a>
+
+    <a (click)="goToProjects()" class="btn-primary">
+      <i class="fa fa-folder-open"></i> View Projects
+    </a>
   </div>
 </div>
 </section>
