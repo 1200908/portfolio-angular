@@ -251,11 +251,11 @@
   height: 450px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(132, 250, 176, 0.3), transparent);
-  animation: pulse 3s ease-in-out infinite;
+  animation: pulseglow 6s ease-in-out infinite;
   z-index: 1;
 }
 
-@keyframes pulse {
+@keyframes pulseglow {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.5;
