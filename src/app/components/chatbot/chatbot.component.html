@@ -1,0 +1,125 @@
+<!-- src/app/components/chatbot/chatbot.component.html -->
+
+<!-- Ícone do Chat (sempre visível) -->
+<div class="chat-icon" (click)="openChat()" *ngIf="!chatVisible">
+  <img src="assets/profile-pic.png" alt="Jorge Vieira">
+</div>
+
+<!-- Chat Box -->
+<div class="chat-box" *ngIf="chatVisible">
+  <div class="chat-header">
+    <div class="header-info">
+      <img src="assets/profile-pic.png" alt="Jorge Vieira" class="header-avatar">
+      <div>
+        <h3>JorgeAI</h3>
+        <span class="status">Online</span>
+      </div>
+    </div>
+    <button class="close-btn" (click)="chatVisible=false">
+      <span>×</span>
+    </button>
+  </div>
+
+  <div class="chat-body" #chatBody>
+    <!-- Loop através de todas as mensagens -->
+    <div *ngFor="let msg of messages"
+         [ngClass]="msg.isBot ? 'message bot-message' : 'message user-message'">
+
+      <!-- Avatar do bot (só para mensagens do bot) -->
+      <div class="message-avatar" *ngIf="msg.isBot">
+        <img src="assets/profile-pic.png" alt="Bot">
+      </div>
+
+      <div class="message-content">
+        <p [innerHTML]="formatMessage(msg.text)"></p>
+        <span class="message-time">{{ msg.timestamp | date:'HH:mm' }}</span>
+      </div>
+    </div>
+
+    <!-- Mensagens Predefinidas (aparecem no início) -->
+    <div class="quick-replies" *ngIf="showQuickReplies && messages.length <= 1">
+      <p class="quick-replies-title">Suggested questions:</p>
+      <button
+        *ngFor="let reply of quickReplies"
+        class="quick-reply-btn"
+        (click)="sendQuickReply(reply)">
+        {{ reply }}
+      </button>
+    </div>
+
+    <!-- Indicador "a digitar" -->
+    <div class="message bot-message" *ngIf="isTyping">
+      <div class="message-avatar">
+        <img src="assets/profile-pic.png" alt="Bot">
+      </div>
+      <div class="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <input
+      [(ngModel)]="question"
+      placeholder="Type your message..."
+      (keyup.enter)="askQuestion()"
+      [disabled]="isTyping"
+    />
+    <button class="send-btn" (click)="askQuestion()" [disabled]="isTyping || !question.trim()">
+      <span>➤</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Estilos para as mensagens predefinidas */
+  .quick-replies {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 10px;
+    animation: fadeInUp 0.4s ease-out;
+  }
+
+  .quick-replies-title {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .quick-reply-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
+
+  .quick-reply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  .quick-reply-btn:active {
+    transform: translateY(0);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

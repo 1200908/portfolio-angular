@@ -3,12 +3,14 @@ import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
 import { isPlatformBrowser } from '@angular/common';
 import {TimelineComponent} from "../../components/timeline/timeline.component";
+import { ChatbotComponent } from '../../components/chatbot/chatbot.component';
+
 import Typed from 'typed.js';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink , CommonModule, TimelineComponent ],
+  imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -1,0 +1,174 @@
+import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterLink } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { TimelineComponent } from "../timeline/timeline.component";
+import { FormsModule } from "@angular/forms";
+import { firstValueFrom } from "rxjs";
+
+interface Message {
+  text: string;
+  isBot: boolean;
+  timestamp: Date;
+}
+
+@Component({
+  selector: 'app-chatbot',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    TimelineComponent,
+    HttpClientModule
+  ],
+  templateUrl: './chatbot.component.html',
+  styleUrls: ['./chatbot.component.css']
+})
+export class ChatbotComponent implements AfterViewChecked {
+  @ViewChild('chatBody') private chatBody!: ElementRef;
+
+  chatVisible = false;
+  question = '';
+  messages: Message[] = [];
+  isTyping = false;
+  showQuickReplies = true;
+  private shouldScroll = false;
+
+  quickReplies: string[] = [
+    '👨‍💻 What are your skills?',
+    '📁 Show me your projects',
+    '📧 How can I get in touch?',
+    '🎓 What is Jorge education?'
+  ];
+  constructor(private http: HttpClient) {}
+
+  openChat() {
+    this.chatVisible = true;
+
+    if (this.messages.length === 0) {
+      this.messages.push({
+        text: 'Hello! 👋 I’m JorgeAI, Jorge’s AI assistant. How may I help you?',
+        isBot: true,
+        timestamp: new Date()
+      });
+    }
+  }
+  sendQuickReply(reply: string) {
+    // Remove emojis da mensagem antes de enviar
+    const cleanMessage = reply.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+
+    this.question = cleanMessage;
+    this.askQuestion();
+
+    // Esconde as mensagens predefinidas após o primeiro uso
+    this.showQuickReplies = false;
+  }
+
+  askQuestion() {
+    if (!this.question.trim() || this.isTyping) {
+      return;
+    }
+
+    this.messages.push({
+      text: this.question,
+      isBot: false,
+      timestamp: new Date()
+    });
+
+    // Esconde quick replies após primeira mensagem
+    this.showQuickReplies = false;
+
+    const userQuestion = this.question;
+    this.question = '';
+
+    this.isTyping = true;
+    this.shouldScroll = true;
+
+    this.callChatAPI(userQuestion).then(response => {
+      this.isTyping = false;
+
+      this.messages.push({
+        text: response,
+        isBot: true,
+        timestamp: new Date()
+      });
+
+      this.shouldScroll = true;
+    }).catch(error => {
+      this.isTyping = false;
+      this.messages.push({
+        text: 'Desculpa, ocorreu um erro. Tenta novamente.',
+        isBot: true,
+        timestamp: new Date()
+      });
+      this.shouldScroll = true;
+      console.error('Erro ao chamar API:', error);
+    });
+  }
+
+  private async callChatAPI(question: string): Promise<string> {
+    try {
+      console.log('📤 Enviando pergunta:', question);
+
+      const response = await firstValueFrom(
+        this.http.post<any>('http://13.62.220.4:3010/api/rag/query', {
+          question: question
+        })
+      );
+
+      console.log('📥 Resposta recebida:', response);
+
+      // A tua API retorna em 'body'
+      if (response.body) {
+        return response.body;
+      } else if (response.answer) {
+        return response.answer;
+      } else if (response.message) {
+        return response.message;
+      } else if (response.response) {
+        return response.response;
+      } else if (typeof response === 'string') {
+        return response;
+      } else {
+        console.warn('⚠️ Formato de resposta desconhecido:', response);
+        return 'Recebi a resposta mas não consegui interpretá-la.';
+      }
+
+    } catch (error: any) {
+      console.error('❌ Erro ao chamar API:', error);
+
+      // Mensagens de erro mais específicas
+      if (error.status === 0) {
+        throw new Error('Não consegui conectar ao servidor. Verifica se está a correr em http://localhost:3000');
+      } else if (error.status === 404) {
+        throw new Error('Endpoint não encontrado. Verifica se /api/rag/query está correto.');
+      } else if (error.error?.message) {
+        throw new Error(error.error.message);
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (this.shouldScroll) {
+      this.scrollToBottom();
+      this.shouldScroll = false;
+    }
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.chatBody.nativeElement.scrollTop = this.chatBody.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+
+  // Formata a mensagem (preserva quebras de linha e converte markdown simples)
+  formatMessage(text: string): string {
+    return text
+      .replace(/\n/g, '<br>')  // Quebras de linha
+      .replace(/\* (.*?)(?=\n|$)/g, '$1')  // Negrito para *
+      .replace(/• (.*?)(?=\n|$)/g, '&nbsp;&nbsp;• $1');  // Indentação para •
+  }
+}
