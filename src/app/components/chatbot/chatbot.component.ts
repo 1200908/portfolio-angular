@@ -33,6 +33,7 @@ export class ChatbotComponent implements AfterViewChecked {
   messages: Message[] = [];
   isTyping = false;
   showQuickReplies = true;
+  showDetailedSuggestions = false;
   private shouldScroll = false;
 
   quickReplies: string[] = [
@@ -41,6 +42,24 @@ export class ChatbotComponent implements AfterViewChecked {
     '📧 How can I get in touch?',
     '🎓 What is Jorge education?'
   ];
+
+  detailedSuggestions: string[] = [
+    '👨‍💻 What are your skills?',
+    '📁 Show me your projects',
+    '📧 How can I get in touch?',
+    '🎓 What is Jorge education?',
+    '🏆 What are your achievements?',
+    '🌍 Where are you based?'
+  ];
+
+  get currentSuggestions(): string[] {
+    // Se só tem a mensagem de boas-vindas, mostra iniciais
+    if (this.messages.length <= 1) {
+      return this.quickReplies;
+    }
+    // Depois da primeira pergunta, mostra detalhadas
+    return this.detailedSuggestions;
+  }
   constructor(private http: HttpClient) {}
 
   openChat() {
@@ -62,7 +81,8 @@ export class ChatbotComponent implements AfterViewChecked {
     this.askQuestion();
 
     // Esconde as mensagens predefinidas após o primeiro uso
-    this.showQuickReplies = false;
+    this.showQuickReplies = true;
+    this.showDetailedSuggestions = false;
   }
 
   askQuestion() {
@@ -78,6 +98,8 @@ export class ChatbotComponent implements AfterViewChecked {
 
     // Esconde quick replies após primeira mensagem
     this.showQuickReplies = false;
+    this.showDetailedSuggestions = false;
+
 
     const userQuestion = this.question;
     this.question = '';
@@ -112,7 +134,7 @@ export class ChatbotComponent implements AfterViewChecked {
       console.log('📤 Enviando pergunta:', question);
 
       const response = await firstValueFrom(
-        this.http.post<any>('http://13.62.220.4:3010/api/rag/query', {
+        this.http.post<any>('https://plain-river-0111.gocasesxdlol.workers.dev/api/rag/query', {
           question: question
         })
       );
@@ -171,4 +193,5 @@ export class ChatbotComponent implements AfterViewChecked {
       .replace(/\* (.*?)(?=\n|$)/g, '$1')  // Negrito para *
       .replace(/• (.*?)(?=\n|$)/g, '&nbsp;&nbsp;• $1');  // Indentação para •
   }
+
 }
