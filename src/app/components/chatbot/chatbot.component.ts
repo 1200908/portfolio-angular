@@ -34,6 +34,7 @@ export class ChatbotComponent implements AfterViewChecked {
   isTyping = false;
   showQuickReplies = true;
   showDetailedSuggestions = false;
+  showScrollToLastMessage = false;
   private shouldScroll = false;
 
   quickReplies: string[] = [
@@ -49,6 +50,8 @@ export class ChatbotComponent implements AfterViewChecked {
     '📧 How can I get in touch?',
     '🎓 What is Jorge education?',
     '🏆 What are your achievements?',
+    '🛠️ What technologies do you use?',
+    '📄 Can you build me your CV?',
     '🌍 Where are you based?'
   ];
 
@@ -117,10 +120,17 @@ export class ChatbotComponent implements AfterViewChecked {
       });
 
       this.shouldScroll = true;
+      if (response.length > 300) {
+        console.log('✅ Vai mostrar botão!');
+        setTimeout(() => {
+          this.showScrollToLastMessage = true;
+          console.log('🔘 Botão ativado!');
+        }, 500);
+      }
     }).catch(error => {
       this.isTyping = false;
       this.messages.push({
-        text: 'Desculpa, ocorreu um erro. Tenta novamente.',
+        text: 'Sorry, an error occurred. Please try again.',
         isBot: true,
         timestamp: new Date()
       });
@@ -192,6 +202,36 @@ export class ChatbotComponent implements AfterViewChecked {
       .replace(/\n/g, '<br>')  // Quebras de linha
       .replace(/\* (.*?)(?=\n|$)/g, '$1')  // Negrito para *
       .replace(/• (.*?)(?=\n|$)/g, '&nbsp;&nbsp;• $1');  // Indentação para •
+  }
+
+  scrollToLastMessage(): void {
+    if (this.chatBody && this.messages.length > 0) {
+      const chatElement = this.chatBody.nativeElement;
+      const allMessages = chatElement.querySelectorAll('.message');
+      const lastMessage = allMessages[allMessages.length - 1];
+
+      if (lastMessage) {
+        // Scroll para o início da última mensagem
+        lastMessage.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start' // Alinha ao topo
+        });
+
+        // Esconde o botão após clicar
+        this.showScrollToLastMessage = false;
+      }
+    }
+  }
+
+  toggleSuggestions() {
+    if (this.showScrollToLastMessage) {
+      // Se o botão "View answer" estiver visível, esconde-o e mostra as sugestões
+      this.showScrollToLastMessage = false;
+      this.showDetailedSuggestions = true;
+    } else {
+      // Alterna normalmente
+      this.showDetailedSuggestions = !this.showDetailedSuggestions;
+    }
   }
 
 }

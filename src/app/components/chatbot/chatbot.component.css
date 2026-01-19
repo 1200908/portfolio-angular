@@ -3,9 +3,9 @@
   position: fixed;
   bottom: 24px;
   right: 24px;
-  width: 70px;
-  height: 70px;
-  border-radius: 60%;
+  width: 90px;
+  height: 90px;
+  border-radius: 90%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   cursor: pointer;
   display: flex;
@@ -16,6 +16,7 @@
   z-index: 1000;
   overflow: visible !important;
   animation: bounce 2s ease-in-out infinite;
+  border: none;
 }
 
 @keyframes bounce {
@@ -217,6 +218,7 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #f8f9fa;
   display: flex;
   flex-direction: column;
@@ -486,7 +488,7 @@ strong {
   background: #f8f9fa;
   margin: 0;
   max-height: 300px;  /* altura máxima da caixa */
-  overflow-y: auto;   /* permite scroll vertical se o conteúdo passar */
+  /*overflow-y: auto;*/   /* permite scroll vertical se o conteúdo passar */
   padding: 10px;
 }
 
@@ -494,13 +496,13 @@ strong {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: 6px;
+  padding: 6px 8px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   transition: all 0.3s ease;
   text-align: left;
@@ -548,13 +550,16 @@ strong {
 
 /* Container das sugestões detalhadas */
 .detailed-replies {
+  margin-top: 3px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 16px;
   background: #ffffff;
-  animation: slideDown 0.3s ease-out;
-  border-top: 1px solid #e8e8e8;
+  /*animation: slideDown 0.3s ease-out;*/
+  border-top: 2px solid #e8e8e8;
+  max-height: 250px;   /* altura máxima do scroll */
+  overflow-y: auto;    /* scroll vertical */
 }
 
 /* ============================================
@@ -608,3 +613,65 @@ strong {
     gap: 8px;
   }
 }
+
+.scroll-to-last-message {
+  position: absolute;
+  bottom: 160px;
+  right: 20px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 100;
+  animation: slideUpBounce 0.5s ease;
+}
+
+.scroll-to-last-message .arrow {
+  font-size: 18px;
+  font-weight: bold;
+  animation: bounceArrow 1s infinite;
+}
+
+.scroll-to-last-message:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.scroll-to-last-message:active {
+  transform: translateY(-1px);
+}
+
+@keyframes slideUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+

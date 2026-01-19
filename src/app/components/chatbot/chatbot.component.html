@@ -2,14 +2,14 @@
 
 <!-- Ícone do Chat (sempre visível) -->
 <div class="chat-icon" (click)="openChat()" *ngIf="!chatVisible">
-  <img src="assets/profile-pic.png" alt="Jorge Vieira">
+  <img src="assets/carton.jpg" alt="Jorge Vieira">
 </div>
 
 <!-- Chat Box -->
 <div class="chat-box" *ngIf="chatVisible">
   <div class="chat-header">
     <div class="header-info">
-      <img src="assets/profile-pic.png" alt="Jorge Vieira" class="header-avatar">
+      <img src="assets/carton.jpg" alt="Jorge Vieira" class="header-avatar">
       <div>
         <h3>JorgeAI</h3>
         <span class="status">Online</span>
@@ -27,7 +27,7 @@
 
       <!-- Avatar do bot (só para mensagens do bot) -->
       <div class="message-avatar" *ngIf="msg.isBot">
-        <img src="assets/profile-pic.png" alt="Bot">
+        <img src="assets/carton.jpg" alt="Bot">
       </div>
 
       <div class="message-content">
@@ -50,7 +50,7 @@
     <!-- Indicador "a digitar" -->
     <div class="message bot-message" *ngIf="isTyping">
       <div class="message-avatar">
-        <img src="assets/profile-pic.png" alt="Bot">
+        <img src="assets/carton.jpg" alt="Bot">
       </div>
       <div class="typing-indicator">
         <span></span>
@@ -60,9 +60,11 @@
     </div>
   </div>
 
+
+
   <!-- FASE 2: Sugestões Detalhadas Colapsáveis (após primeira mensagem) -->
-  <div class="suggestions-container" *ngIf="messages.length > 1">
-    <button class="suggestions-toggle" (click)="showDetailedSuggestions = !showDetailedSuggestions">
+  <div class="suggestions-container" *ngIf="messages.length > 2">
+    <button class="suggestions-toggle" (click)="toggleSuggestions()">
       <span class="toggle-icon">{{ showDetailedSuggestions ? '▼' : '▶' }}</span>
       <span class="toggle-text">More suggested questions</span>
       <span class="badge">{{ detailedSuggestions.length }}</span>
@@ -77,6 +79,15 @@
       </button>
     </div>
   </div>
+
+  <button
+    *ngIf="showScrollToLastMessage"
+    class="scroll-to-last-message"
+    (click)="scrollToLastMessage()"
+    title="Ver última resposta">
+    <span class="arrow">↑</span>
+    <span class="text">View answer</span>
+  </button>
 
   <div class="chat-footer">
     <input
