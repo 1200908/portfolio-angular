@@ -1,17 +1,37 @@
-import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild, OnInit} from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {Router, RouterLink} from '@angular/router';
 import Typed from "typed.js";
-import {isPlatformBrowser} from "@angular/common";
+import {isPlatformBrowser, CommonModule} from "@angular/common";
+import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
 
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
+interface GithubLanguages {
+  [language: string]: number;
+}
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,
+    HttpClientModule,
+    CommonModule,
+    GithubLanguagesChartComponent],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent {
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
+
+
+  @ViewChild('languageChart') languageChart?: ElementRef<HTMLCanvasElement>;
+
+
+  chart?: Chart;
+
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient) { }
+
+
   goToAbout() {
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');

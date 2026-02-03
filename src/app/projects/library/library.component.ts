@@ -2,11 +2,12 @@ import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/co
 import {Router, RouterLink} from '@angular/router';
 import Typed from "typed.js";
 import {isPlatformBrowser} from "@angular/common";
+import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, GithubLanguagesChartComponent],
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
 })

@@ -4,13 +4,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { GithubLanguagesChartComponent } from './components/github-languages-chart/github-languages-chart.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, TimelineComponent, ChatbotComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, TimelineComponent, ChatbotComponent, GithubLanguagesChartComponent],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

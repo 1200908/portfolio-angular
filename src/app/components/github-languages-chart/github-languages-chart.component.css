@@ -1,0 +1,63 @@
+.languages-section {
+  margin: 40px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.donut-chart {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legend-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.legend-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.legend-percentage {
+  font-weight: 700;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.legend-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.legend-separator {
+  margin: 0 4px;
+  color: #666;
+}

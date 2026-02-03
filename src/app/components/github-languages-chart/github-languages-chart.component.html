@@ -1,0 +1,34 @@
+<div class="languages-section" *ngIf="languages.length > 0">
+  <div class="donut-container">
+    <!-- Donut Chart SVG -->
+    <div class="donut-chart">
+      <svg viewBox="0 0 200 200" class="donut-svg">
+        <g *ngFor="let lang of languages; let i = index">
+          <path
+            [attr.d]="getArcPath(lang.offset, lang.offset + parseFloat(lang.percentage))"
+            [attr.fill]="lang.color"
+            class="donut-segment"
+            [attr.data-name]="lang.name"
+            [attr.data-percentage]="lang.percentage">
+          </path>
+        </g>
+        <circle cx="100" cy="100" r="60" fill="#fff"/>
+        <text x="100" y="95" text-anchor="middle" class="donut-center-text">
+          {{ languages.length }}
+        </text>
+        <text x="100" y="110" text-anchor="middle" class="donut-center-subtext">
+          Languages
+        </text>
+      </svg>
+    </div>
+    <div class="donut-legend">
+      <div *ngFor="let lang of languages" class="legend-item">
+        <div class="legend-color" [style.background-color]="lang.color"></div>
+        <div class="legend-info">
+          <span class="legend-percentage">{{ lang.percentage }}%</span>
+          <span class="legend-name">{{ lang.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

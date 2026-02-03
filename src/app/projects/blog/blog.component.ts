@@ -1,12 +1,13 @@
 import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import Typed from "typed.js";
+import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
 import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, GithubLanguagesChartComponent],
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
