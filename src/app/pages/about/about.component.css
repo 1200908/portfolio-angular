@@ -141,19 +141,23 @@
 }
 
 .download-btn {
-  display: inline-block;
-  padding: 12px 25px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 185px;
+  padding: 10px 10px;
   background: linear-gradient(135deg, #667eea 0%, #a0e8cd 100%);
   color: white;
   border-radius: 50px;
   margin-top: 10px;
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 5px 10px rgba(102, 126, 234, 0.3);
   transition: all 0.3s ease;
-
+  margin-right: 10px;
+  text-decoration: none;
 }
 
 .download-btn:hover {
-  transform: translateY(-3px);
+  transform: translateY( -5px);
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
   color: white;
 }
@@ -490,12 +494,12 @@ section h2 {
   }
 }
 .social-icons_ {
-  animation: pulse 5s infinite;
+  animation: pulse 10s infinite;
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
 }
 
 #experience {
