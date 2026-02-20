@@ -114,6 +114,8 @@
   flex: 1;
   min-width: 300px;
   color: white;
+  text-align: center;
+  align-items: center;
 }
 
 .hero-title {
@@ -154,6 +156,8 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
   animation: fadeInUp 1s ease 0.6s backwards;
+  justify-content: center;
+  gap: 40px;
 }
 
 .btn-primary, .btn-secondary {
@@ -195,6 +199,7 @@
 
 .hero-social {
   display: flex;
+  justify-content: center;
   gap: 15px;
   animation: fadeInUp 1s ease 0.8s backwards;
 }
