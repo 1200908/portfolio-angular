@@ -5,6 +5,7 @@ import { LibraryComponent } from './projects/library/library.component';
 import {BlogComponent} from "./projects/blog/blog.component";
 import {PortfolioComponent} from "./projects/portfolio/portfolio.component";
 import {MicroservicesComponent} from "./projects/microservices/microservices.component";
+import {TunanceComponent} from "./projects/tunance/tunance.component";
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'projects/blog', component: BlogComponent },
   { path: 'projects/portfolio', component: PortfolioComponent },
   { path: 'projects/microservices', component: MicroservicesComponent },
+  { path: 'projects/tunanc', component: TunanceComponent },
   { path: '**', redirectTo: '' }
 ];
 

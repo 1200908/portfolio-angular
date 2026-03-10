@@ -4,13 +4,16 @@ import {CommonModule} from "@angular/common";
 import { isPlatformBrowser } from '@angular/common';
 import {TimelineComponent} from "../../components/timeline/timeline.component";
 import { ChatbotComponent } from '../../components/chatbot/chatbot.component';
+import {ScrollRevealDirective} from '../../shared/directives/scroll-reveal.directive';
+
+
 
 import Typed from 'typed.js';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent ],
+  imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent, ScrollRevealDirective ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -31,6 +34,14 @@ export class HomeComponent implements AfterViewInit {
       image: 'assets/pic_blog.png',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Docker', 'AWS EC2', 'AWS ECR', 'AWS CodeBuild'],
       route: '/projects/blog'
+    },
+    {
+      id: 'tunance-website',
+      title: 'Tunance Website',
+      description: 'Fully deployed and live web platform at tunance.pt, built with modern HTML5, CSS3, and Angular. Features responsive layouts, interactive elements, and smooth animations, providing a real-world user experience.',
+      image: 'assets/tunance_project.png',
+      tags: ['Angular', 'TypeScript', 'Routing', 'Responsive Design', 'HTML5 / CSS3', 'Animations', 'Live Deployment'],
+      route: '/projects/tunance'
     },
     {
       id: 'frontend-portfolio',
