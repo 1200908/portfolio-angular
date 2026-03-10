@@ -1,12 +1,20 @@
 <div class="home-container" >
   <!-- Hero Section -->
-  <section class="hero-section" id="container-principals">
-    <div class="hero-background">
-      <div class="animated-blob blob1"></div>
-      <div class="animated-blob blob2"></div>
-      <div class="animated-blob blob3"></div>
+  <div class="hero-background">
+    <div class="animated-blob blob2"></div>
+    <div class="animated-blob blob3"></div>
+    <div class="floating-icons">
+      <i *ngFor="let icon of icons"
+         [class]="icon.class + ' floating-icon'"
+         [style.left.%]="icon.x"
+         [style.top.%]="icon.y"
+         [style.animation-duration]="icon.duration + 's'"
+         [style.animation-delay]="icon.delay + 's'">
+      </i>
     </div>
+  </div>
 
+  <section class="hero-section" id="container-principals">
     <div class="hero-content" >
       <div class="hero-text">
         <h1 class="hero-title">
@@ -105,10 +113,10 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="projects-section hidden" appScrollReveal>
+  <section id="projects" class="projects-section">
     <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
-      <p class="section-subtitle">Explore some of my recent work</p>
+      <h2 class="section-title hidden" appScrollReveal> Featured Projects</h2>
+      <p class="section-subtitle hidden" appScrollReveal> Explore some of my recent work</p>
 
       <div class="projects-grid hidden" appScrollReveal>
         <div class="project-card" *ngFor="let project of projects" >

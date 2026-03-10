@@ -30,72 +30,112 @@
    HERO SECTION
    ============================================ */
 .hero-section {
-  width: 100%;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  background: linear-gradient(135deg, #6378ec 0%, #a0e8cd 100%);
-  overflow: hidden;
+  background: transparent; /* transparente para ver os blobs fixos */
   padding: 80px 20px 60px;
+  overflow: visible;
 }
 
 .hero-background {
-  position: absolute;
+  position: fixed;       /* fixa na tela, igual à imagem */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  opacity: 0.3;
+  z-index: -1;           /* atrás de tudo */
+  pointer-events: none;  /* não interfere com clique */
+  background: linear-gradient(180deg, #6378ec   0%, #a0e8cd 100%); /* gradiente base */
+}
+.floating-icon {
+  position: absolute;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  animation: floatIcon  10s ease-in-out infinite;
+  transition: left 0.1s ease, top 0.1s ease; /* suaviza o movimento */
+  pointer-events: none;
+}
+
+@keyframes floatIcon {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(15px, -20px) rotate(8deg); }
+  50%  { transform: translate(-10px, 15px) rotate(-6deg); }
+  75%  { transform: translate(20px, 10px) rotate(10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+  .floating-icon {
+    font-size: 1.5rem;  /* mais pequenos */
+    opacity: 0.4;       /* mais subtis */
+  }
 }
 
 .animated-blob {
   position: absolute;
-  border-radius: 40%;
+  border-radius: 50%;
   filter: blur(40px);
-  animation: float 20s ease-in-out infinite;
+  animation: floatBlob1 30s ease-in-out infinite;
 }
 
 .blob1 {
   width: 400px;
   height: 400px;
-  background: rgba(255, 255, 255, 0.8);
-  top: -100px;
-  left: -100px;
-  animation-delay: 0s;
+  top: 20%;
+  left: 20%;
+  background: rgba(255,255,255,0.4);
+  animation: floatBlob1 20s ease-in-out infinite;
 }
 
 .blob2 {
   width: 300px;
   height: 300px;
-  background: rgba(99, 179, 237, 0.7);
-  bottom: -50px;
-  right: -50px;
-  animation-delay: 7s;
+  top: 70%;
+  left: 80%;
+  background: rgba(99,179,237,0.3);
+  animation: floatBlob2 15s ease-in-out infinite;
 }
 
 .blob3 {
   width: 350px;
   height: 350px;
-  background: rgba(90, 187, 68, 0.7);
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  animation-delay: 14s;
+  background: rgba(90,187,68,0.25);
+  animation: floatBlob3 10s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(50px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-30px, 30px) scale(0.9);
-  }
+@keyframes floatBlob1 {
+  0%   { transform: translate(0, 0); }
+  12%  { transform: translate(80px, -120px); }
+  27%  { transform: translate(-60px, 40px); }
+  41%  { transform: translate(150px, 90px); }
+  58%  { transform: translate(-30px, -80px); }
+  73%  { transform: translate(110px, -30px); }
+  89%  { transform: translate(-90px, 110px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes floatBlob2  {
+  0%   { transform: translate(0, 0); }
+  17%  { transform: translate(-130px, 60px); }
+  33%  { transform: translate(70px, -90px); }
+  49%  { transform: translate(-50px, 130px); }
+  62%  { transform: translate(120px, 40px); }
+  78%  { transform: translate(-80px, -60px); }
+  91%  { transform: translate(40px, 100px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes floatBlob3 {
+  0%,100% { transform: translate(0, 0); }
+  25%     { transform: translate(80px, 100px); }
+  50%     { transform: translate(-120px, -80px); }
+  75%     { transform: translate(40px, 20px); }
 }
 
 .hero-content {
