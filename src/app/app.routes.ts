@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'projects/blog', component: BlogComponent },
   { path: 'projects/portfolio', component: PortfolioComponent },
   { path: 'projects/microservices', component: MicroservicesComponent },
-  { path: 'projects/tunanc', component: TunanceComponent },
+  { path: 'projects/tunance', component: TunanceComponent },
   { path: '**', redirectTo: '' }
 ];
 
