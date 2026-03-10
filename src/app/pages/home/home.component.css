@@ -46,7 +46,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   z-index: -1;           /* atrás de tudo */
   pointer-events: none;  /* não interfere com clique */
   background: linear-gradient(180deg, #6378ec   0%, #a0e8cd 100%); /* gradiente base */
@@ -58,6 +58,7 @@
   animation: floatIcon  10s ease-in-out infinite;
   transition: left 0.1s ease, top 0.1s ease; /* suaviza o movimento */
   pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes floatIcon {
@@ -386,13 +387,11 @@
   background: white;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  animation: pulse 10s infinite;
   transition: transform 0.35s cubic-bezier(.34,1.56,.64,1),
   box-shadow 0.35s ease;
 }
 
 .tech-item:hover {
-  animation: none;
   transform: translateY(-15px) scale(1.07);
   box-shadow: 0 25px 60px rgba(0,0,0,0.3);
 }

@@ -180,7 +180,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       const dx = icon.x - this.mouseX;
       const dy = icon.y - this.mouseY;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const repelRadius = 10;
+      const repelRadius = 15;
 
       if (dist < repelRadius && dist > 0) {
         const force = (repelRadius - dist) / repelRadius;
