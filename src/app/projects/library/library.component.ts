@@ -3,11 +3,16 @@ import {Router, RouterLink} from '@angular/router';
 import Typed from "typed.js";
 import {isPlatformBrowser} from "@angular/common";
 import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
+import { CommonModule } from '@angular/common';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/dist/photoswipe.css';
+import {GalleryComponent} from "../../shared/gallery/gallery.component";
+
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [RouterLink, GithubLanguagesChartComponent],
+  imports: [RouterLink, GithubLanguagesChartComponent, CommonModule, GalleryComponent   ],
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
 })
@@ -65,5 +70,43 @@ export class LibraryComponent {
       }, 50);
     }
   }
+
+  imagesList = [
+    {
+      src: 'assets/image1.png',
+      title: 'Login Screen (Android)',
+      description: 'Secure authentication interface with JWT token management'
+    },
+    {
+      src: 'assets/Screenshot_Library_1.jpg',
+      title: 'Register User (Android)',
+      description: 'Registration page with name, email, phone ...etc and frontend validations'
+    },
+    {
+      src: 'assets/image2.png',
+      title: 'Librarian Menu (Android)',
+      description: 'Main menu for users with Librarian role, showing role-specific options'
+    },
+    {
+      src: 'assets/Screenshot_Library_4.jpg',
+      title: 'Reader Menu (Android)',
+      description: 'Main menu for users with Reader role, showing lending and browsing options'
+    },
+    {
+      src: 'assets/Screenshot_Library_5.jpg',
+      title: 'Book Details (Android)',
+      description: 'Detailed view of a book including author, genre, availability, and other metadata'
+    },
+    {
+      src: 'assets/Screenshot_Library_6.png',
+      title: 'Main Menu (React Native)',
+      description: 'Main dashboard interface for React Native frontend, showing login options'
+    },
+    {
+      src: 'assets/Screenshot_Library_7.png',
+      title: 'Librarian Menu (React Native)',
+      description: 'Mobile interface for Librarian role, demonstrating cross-platform design with React Native'
+    }
+  ];
 
 }

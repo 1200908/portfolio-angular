@@ -186,34 +186,7 @@
       </h2>
       <p class="screenshots-hint">Click on image to view in fullscreen</p>
 
-      <div class="screenshots-grid">
-        <div class="screenshot-card" (click)="openImageModal('assets/blog-frontend.png', 'React Interface - Main Page')">
-          <div class="screenshot-wrapper">
-            <img src="assets/blog-frontend.png" alt="Frontend Screenshot" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Frontend </h4>
-            <p>React interface showing the main dashboard for generating blog articles.</p>
-          </div>
-        </div>
-      </div>
-
-        <div class="screenshot-card" (click)="openImageModal('assets/blog-frontend-details.png', 'React Interface - Article Details')">
-          <div class="screenshot-wrapper">
-            <img src="assets/blog-frontend-details.png" alt="Frontend Screenshot" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Article Details</h4>
-            <p>React interface displaying the detailed view of a selected blog article.</p>
-          </div>
-        </div>
-
+      <app-gallery [images]="imagesList"></app-gallery>
     </section>
 
     <section class="content-section challenges-section">

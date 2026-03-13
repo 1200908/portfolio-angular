@@ -201,101 +201,14 @@
       </div>
     </section>
 
-    <!-- Screenshots Section -->
     <section class="content-section screenshots-section">
       <h2 class="section-heading">
         <i class="fa fa-picture-o"></i> Application Screenshots
       </h2>
       <p class="screenshots-hint">Click on any image to view in fullscreen</p>
 
-      <div class="screenshots-grid">
-        <div class="screenshot-card" (click)="openImageModal('assets/image1.png', 'Login Screen Android')">
-          <div class="screenshot-wrapper">
-            <img src="assets/image1.png" alt="Login Screen" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Login Screen (Android)</h4>
-            <p>Secure authentication interface with JWT token management</p>
-          </div>
-        </div>
-
-        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_1.jpg', 'RegistUser Android')">
-          <div class="screenshot-wrapper">
-            <img src="assets/Screenshot_Library_1.jpg" alt="Main Menu" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Register User (Android)</h4>
-            <p>Registration page with name, email, phone ...etc and frontend validations</p>
-          </div>
-        </div>
-
-        <div class="screenshot-card" (click)="openImageModal('assets/image2.png', 'Librarian Menu Android')">
-          <div class="screenshot-wrapper">
-            <img src="assets/image2.png" alt="Book Catalog" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Librarian Menu (Android)</h4>
-            <p>Main menu for users with Librarian role, showing role-specific options</p>
-          </div>
-        </div>
-        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_4.jpg', 'Reader Menu Android')">
-          <div class="screenshot-wrapper">
-            <img src="assets/Screenshot_Library_4.jpg" alt="Loan Management" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Reader Menu (Android)</h4>
-            <p>Main menu for users with Reader role, showing lending and browsing options</p>
-          </div>
-        </div>
-        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_5.jpg', 'Book Details Android')">
-          <div class="screenshot-wrapper">
-            <img src="assets/Screenshot_Library_5.jpg" alt="Loan Management" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Book Details (Android)</h4>
-            <p>Detailed view of a book including author, genre, availability, and other metadata</p>
-          </div>
-        </div>
-        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_6.png', 'Login Screen React Native')">
-          <div class="screenshot-wrapper">
-            <img src="assets/Screenshot_Library_6.png" alt="Loan Management" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Main Menu (React Native)</h4>
-            <p>Main dashboard interface for React Native frontend, showing login options</p>
-          </div>
-        </div>
-        <div class="screenshot-card" (click)="openImageModal('assets/Screenshot_Library_7.png', 'Librarian Menu React Native')">
-          <div class="screenshot-wrapper">
-            <img src="assets/Screenshot_Library_7.png" alt="Loan Management" class="project-screenshot">
-            <div class="screenshot-overlay">
-              <i class="fa fa-search-plus"></i>
-            </div>
-          </div>
-          <div class="screenshot-caption">
-            <h4>Librarian Menu (React Native)</h4>
-            <p>obile interface for Librarian role, demonstrating cross-platform design with React Native</p>
-          </div>
-        </div>
-      </div>
+      <!-- Aqui chamamos o GalleryComponent e passamos a lista -->
+      <app-gallery [images]="imagesList"></app-gallery>
     </section>
 
     <!-- Challenges & Solutions -->
@@ -405,12 +318,5 @@
       </div>
     </div>
   </section>
-
-  <div class="image-modal" [class.active]="isModalOpen" (click)="closeImageModal()">
-    <div class="modal-content">
-      <img [src]="modalImageSrc" [alt]="modalImageTitle" class="modal-image">
-      <div class="modal-caption">{{ modalImageTitle }} <i class="fa fa-times"></i> </div>
-    </div>
-  </div>
 
 </div>
