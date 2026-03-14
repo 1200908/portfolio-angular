@@ -135,6 +135,7 @@ import 'swiper/css';
       font-size: 1.1rem;
       color: #333;
       margin: 0 0 6px 0;
+      font-family: inherit;
     }
 
     .gallery-caption p {
