@@ -6,7 +6,7 @@ import {
   Inject,
   ViewChild,
   HostListener,
-  OnInit, OnDestroy
+  OnInit, OnDestroy, ChangeDetectorRef
 } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
@@ -14,6 +14,9 @@ import { isPlatformBrowser } from '@angular/common';
 import {TimelineComponent} from "../../components/timeline/timeline.component";
 import { ChatbotComponent } from '../../components/chatbot/chatbot.component';
 import {ScrollRevealDirective} from '../../shared/directives/scroll-reveal.directive';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 interface FloatingIcon {
   class: string;
   x: number;
@@ -90,7 +93,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       behavior: 'smooth'
     });
   }
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private cdr: ChangeDetectorRef) { }
   goToEducation() {
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
@@ -99,9 +102,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   @ViewChild('typedElement') typedElement?: ElementRef;
+  @ViewChild('projectTitle') projectTitle?: ElementRef;
+  @ViewChild('projectSubtitle') projectSubtitle?: ElementRef;
 
   typed?: Typed;
   ngAfterViewInit() {
+    this.cdr.detectChanges();
+
     if (isPlatformBrowser(this.platformId) && this.typedElement) {
       const element = this.typedElement.nativeElement;
       setTimeout(() => {
@@ -119,7 +126,242 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         });
       }, 50);
     }
-  }
+
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+
+            // GSAP começa após 1s — tempo da animação CSS do título
+            const tl = gsap.timeline({
+              delay: 1,   // ← espera 1s pelo CSS terminar
+              defaults: { ease: 'power3.out' },
+              onComplete: () => initScrollAnimations()
+            });
+
+            tl.fromTo('.hero-subtitle',
+              { autoAlpha: 0, y: 30 },
+              { autoAlpha: 1, y: 0, duration: 0.6 })
+              .fromTo('.hero-description',
+                { autoAlpha: 0, y: 20, filter: 'blur(6px)' },
+                { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.8 }, '-=0.3')
+              .fromTo('.hero-buttons .btn-primary',
+                { autoAlpha: 0, x: -60 },
+                { autoAlpha: 1, x: 0, duration: 0.5 }, '-=0.3')
+              .fromTo('.hero-buttons .btn-secondary',
+                { autoAlpha: 0, x: 60 },
+                { autoAlpha: 1, x: 0, duration: 0.5 }, '-=0.5')
+              .fromTo('.social-link',
+                { autoAlpha: 0, y: 20 },
+                { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.4 }, '-=0.2')
+              .fromTo('.scroll-indicator',
+                { autoAlpha: 0, y: 10 },
+                { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.1');
+
+            const onScroll = () => {
+              if (window.scrollY > 10) {
+                // Anima o timeScale de 1 para 6 suavemente
+                gsap.to(tl, {
+                  timeScale: 6,
+                  duration: 0.3,
+                  ease: 'power2.in'
+                });
+                window.removeEventListener('scroll', onScroll);
+              }
+            };
+
+          }, 50);
+        }
+        function initScrollAnimations() {
+
+          // Description — entra de baixo, sai com blur
+          gsap.fromTo('.hero-description',
+            { y: 0, opacity: 1, filter: 'blur(0px)' },
+            {
+              y: 30, opacity: 0, filter: 'blur(5px)',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: '.hero-section',
+                start: 'top top',
+                end: '+=300',
+                scrub: 1.5
+              },
+              ease: 'none'
+            }
+          );
+
+          // Botão primary — sai para a esquerda ao scrollar
+          gsap.to('.hero-buttons .btn-primary', {
+            x: -80, opacity: 0, rotation: -5,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: '+=400',
+              scrub: 1.5
+            },
+            ease: 'none'
+          });
+
+          // Botão secondary — sai para a direita ao scrollar
+          gsap.to('.hero-buttons .btn-secondary', {
+            x: 80, opacity: 0, rotation: 5,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: '+=400',
+              scrub: 1.5
+            },
+            ease: 'none'
+          });
+
+          // Social links — saem para baixo em stagger ao scrollar
+          gsap.to('.social-link', {
+            y: 40, opacity: 0, stagger: 0.05,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: '+=350',
+              scrub: 1.5
+            },
+            ease: 'none'
+          });
+        }
+
+        // Scroll indicator desaparece
+        gsap.to('.scroll-indicator', {
+          scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: '+=150',
+            scrub: true
+          },
+          opacity: 0,
+          ease: 'none'
+        });
+
+        // Tech Stack title entra da esquerda
+        gsap.fromTo('.tech-stack-section .section-title',
+          { x: -60, rotation: -8, opacity: 0 },
+          {
+            x: 0, rotation: 0, opacity: 1,
+            scrollTrigger: {
+              trigger: '.tech-stack-section',
+              start: 'top 80%',
+              end: 'top 40%',
+              scrub: true
+            },
+            ease: 'none'
+          }
+        );
+
+// Saída para a direita
+        gsap.to('.tech-stack-section .section-title', {
+          x: 60, rotation: 8, opacity: 0, immediateRender: false,
+          scrollTrigger: {
+            trigger: '.tech-stack-section',
+            start: 'top 10%',
+            end: 'top -20%',
+            scrub: true
+          },
+          ease: 'none'
+        });
+
+
+        gsap.utils.toArray<Element>('.tech-item').forEach((item, i) => {
+
+          // Alterna — par entra da esquerda, ímpar da direita
+          const fromX = i % 2 === 0 ? -60 : 60;
+          const toX   = i % 2 === 0 ?  60 : -60; // saída lado oposto
+
+          // Entrada
+          gsap.fromTo(item,
+            { x: fromX, opacity: 0, scale: 0.85 },
+            {
+              x: 0, opacity: 1, scale: 1,
+              scrollTrigger: {
+                trigger: item,         // ← cada item é o seu próprio trigger
+                start: 'top 90%',
+                end: 'top 60%',
+                scrub: true
+              },
+              ease: 'none'
+            }
+          );
+
+          // Saída
+          gsap.to(item, {
+            x: toX, opacity: 0, scale: 0.85,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: item,
+              start: 'bottom 20%',   // ← quando o item sai pelo topo
+              end: 'bottom -10%',
+              scrub: true
+            },
+            ease: 'none'
+          });
+
+        });
+
+        // ── PROJECTS — só UM par de entrada + saída ──
+        gsap.fromTo('.projects-section .section-title',
+          { x: -60, rotation: -8, opacity: 0 },
+          {
+            x: 0, rotation: 0, opacity: 1,
+            scrollTrigger: {
+              trigger: '.projects-section',
+              start: 'top 80%',
+              end: 'top 40%',
+              scrub: true
+            },
+            ease: 'none'
+          }
+        );
+
+        gsap.fromTo('.projects-section .section-subtitle',
+          { x: 60, rotation: 8, opacity: 0 },
+          {
+            x: 0, rotation: 0, opacity: 1,
+            scrollTrigger: {
+              trigger: '.projects-section',
+              start: 'top 80%',
+              end: 'top 40%',
+              scrub: true
+            },
+            ease: 'none'
+          }
+        );
+
+        // Saída para o lado oposto
+        gsap.to('.projects-section .section-title', {
+          x: 60, rotation: 8, opacity: 0, immediateRender: false,
+          scrollTrigger: {
+            trigger: '.projects-section',
+            start: 'top 10%',
+            end: 'top -20%',
+            scrub: true
+          },
+          ease: 'none'
+        });
+
+        gsap.to('.projects-section .section-subtitle', {
+          x: -60, rotation: -8, opacity: 0, immediateRender: false,
+          scrollTrigger: {
+            trigger: '.projects-section',
+            start: 'top 10%',
+            end: 'top -20%',
+            scrub: true
+          },
+          ease: 'none'
+        });
+
+      }, 100);
+    }
+
+}
 
   goToProject(route: string) {
     this.router.navigate([route]).then(() => {
@@ -164,6 +406,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       cancelAnimationFrame(this.animationId);
     }
     this.typed?.destroy();
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
   }
 
   @HostListener('mousemove', ['$event'])

@@ -18,7 +18,7 @@
     <div class="hero-content" >
       <div class="hero-text">
         <h1 class="hero-title">
-          Hi, I'm <span class="name-highlight hidden" appScrollReveal>Jorge Vieira</span>
+          Hi, I'm <span class="name-highlight ">Jorge Vieira</span>
         </h1>
         <p class="hero-subtitle">
           <span #typedElement></span>
@@ -66,8 +66,8 @@
   <!-- Tech Stack Quick View -->
   <section id="tech" class="tech-stack-section">
     <div class="container">
-      <h2 class="section-title">Tech Stack</h2>
-      <div class="tech-grid hidden" appScrollReveal>
+      <h2  #projectTitle class="section-title">Tech Stack</h2>
+      <div #projectSubtitle class="tech-grid hidden" appScrollReveal>
         <div class="tech-item">
           <i class="fa fa-coffee"></i>
           <span>Java</span>
@@ -115,8 +115,8 @@
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
     <div class="container">
-      <h2 class="section-title hidden" appScrollReveal> Featured Projects</h2>
-      <p class="section-subtitle hidden" appScrollReveal> Explore some of my recent work</p>
+      <h2 class="section-title "> Featured Projects</h2>
+      <p class="section-subtitle "> Explore some of my recent work</p>
 
       <div class="projects-grid hidden" appScrollReveal>
         <div class="project-card" *ngFor="let project of projects" >

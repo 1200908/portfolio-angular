@@ -1,6 +1,9 @@
 import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, PLATFORM_ID, Inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 interface TimelineItem {
   year: string;
   title: string;
@@ -125,12 +128,66 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     }
 
     setTimeout(() => this.setupIntersectionObserver(), 50);
+
+    gsap.fromTo('.timeline-section .title',
+      { x: -60, rotation: -8, opacity: 0 },
+      {
+        x: 0, rotation: 0, opacity: 1,
+        scrollTrigger: {
+          trigger: '.timeline-section',
+          start: 'top 80%',
+          end: 'top 40%',
+          scrub: true
+        },
+        ease: 'none'
+      }
+    );
+
+    gsap.fromTo('.timeline-section .subtitle',
+      { x: 60, rotation: 8, opacity: 0 },
+      {
+        x: 0, rotation: 0, opacity: 1,
+        scrollTrigger: {
+          trigger: '.timeline-section',
+          start: 'top 80%',
+          end: 'top 40%',
+          scrub: true
+        },
+        ease: 'none'
+      }
+    );
+
+    // Saída para o lado oposto
+    gsap.to('.timeline-section .title', {
+      x: 60, rotation: 8, opacity: 0, immediateRender: false,
+      scrollTrigger: {
+        trigger: '.timeline-section',
+        start: 'top 10%',
+        end: 'top -20%',
+        scrub: true
+      },
+      ease: 'none'
+    });
+
+    gsap.to('.timeline-section .subtitle', {
+      x: -60, rotation: -8, opacity: 0, immediateRender: false,
+      scrollTrigger: {
+        trigger: '.timeline-section',
+        start: 'top 10%',
+        end: 'top -20%',
+        scrub: true
+      },
+      ease: 'none'
+    });
+
+
   }
 
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
     }
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
   }
 
   setupIntersectionObserver(): void {
