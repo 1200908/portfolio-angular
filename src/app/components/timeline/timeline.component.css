@@ -21,10 +21,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .subtitle {
   text-align: center;
+  opacity: 1 !important;
+  transform: none !important;
   font-size: 1.2rem;
   color: #666;
   margin-bottom: 80px;

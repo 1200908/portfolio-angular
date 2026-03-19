@@ -444,11 +444,13 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
+  transform-style: preserve-3d;
 }
 
 .project-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .project-image-container {
@@ -485,7 +487,7 @@
 }
 
 .project-card:hover .project-overlay {
-  opacity: 1;
+  opacity: 0.75;
 }
 
 .project-link {
@@ -507,7 +509,9 @@
 }
 
 .project-content {
-  padding: 30px;
+  padding: 25px;
+  align-items: center;
+  text-align: center;
 }
 
 .project-title {
@@ -518,25 +522,50 @@
 }
 
 .project-description {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  position: relative;
+  max-height: 5.6em;
+  overflow: hidden;
+  line-height: 1.8em;
 }
 
-.project-tags {
+.project-description::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    #fff
+  );
+}
+
+.project-image-tags {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+  z-index: 3;
 }
 
-.project-tag {
-  padding: 6px 15px;
-  background: #f0f0f0;
+.project-image-tags .project-tag {
+  padding: 5px 14px;
+  background: rgba(102, 126, 234, 0.47);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.3);
   border-radius: 20px;
-  font-size: 0.85rem;
-  color: #667eea;
+  font-size: 0.8rem;
+  color: #ffffff;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .project-details-link {
@@ -551,6 +580,23 @@
 
 .project-details-link:hover {
   gap: 15px;
+}
+
+
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 60px 15px; /* menos espaço vertical e lateral */
+  }
+
+  .section-title {
+    margin-bottom: 1.5rem; /* reduzido */
+    font-size: 2rem; /* opcional: também ajuda no mobile */
+  }
+
+  .section-subtitle {
+    margin-bottom: 1.5rem; /* reduzido */
+    font-size: 1rem; /* opcional */
+  }
 }
 
 /* ============================================
@@ -615,6 +661,7 @@
 
   .hero-subtitle {
     font-size: 1.2rem;
+    min-height: calc(1.4em * 3);
   }
 
   .hero-content {
@@ -673,28 +720,12 @@
       #fff
     );
   }
-  .project-tags {
-    display: none;
+  .project-image-tags .project-tag {
+    font-size: 0.7rem;
   }
 }
 
 
-.hero-image {
-  animation: float 4s ease-in-out infinite alternate;
-}
-
-.project-card {
-  animation: floatup_down 20s ease-in-out infinite alternate;
-}
-
-.project-card:nth-child(even) {
-  animation-direction: alternate-reverse;
-  animation-delay: 2s;
-}
-
-.project-card:nth-child(3n) {
-  animation-delay: 4s;
-}
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
@@ -712,3 +743,5 @@
   50% { transform: translateY(-40px); }
   100% { transform: translateY(-10px); }
 }
+
+

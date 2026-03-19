@@ -44,7 +44,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       title: 'Library Management System',
       description: 'Distributed library management system with microservices architecture, JWT authentication, and multi-platform frontend (Android & React).',
       image: 'assets/img.png',
-      tags: ['Java', 'Spring Boot', 'RabbitMQ', 'Android', 'React Native'],
+      tags: ['Java', 'Spring Boot', 'Android', 'RabbitMQ', 'React Native'],
       route: '/projects/library'
     },
     {
@@ -52,7 +52,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       title: 'Auto-Generated Blogs',
       description: 'Full-stack blog with automated content generation using AI, built as a technical challenge.',
       image: 'assets/pic_blog.png',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'Docker', 'AWS EC2', 'AWS ECR', 'AWS CodeBuild'],
+      tags: ['React', 'Node.js', 'AWS EC2', 'PostgreSQL', 'Docker', 'AWS ECR', 'AWS CodeBuild'],
       route: '/projects/blog'
     },
     {
@@ -60,7 +60,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       title: 'Tunance Website',
       description: 'Fully deployed and live web platform at tunance.pt, built with modern HTML5, CSS3, and Angular. Features responsive layouts, interactive elements, and smooth animations, providing a real-world user experience.',
       image: 'assets/tunance_project.png',
-      tags: ['Angular', 'TypeScript', 'Routing', 'Responsive Design', 'HTML5 / CSS3', 'Animations', 'Live Deployment'],
+      tags: ['Angular' , 'Nonprofit Project', 'Production', 'Animations', 'Live Deployment'],
       route: '/projects/tunance'
     },
     {
@@ -68,7 +68,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       title: 'Frontend Portfolio',
       description: 'Responsive and interactive web interface built with modern HTML5, CSS3, and Flexbox/Grid.',
       image: 'assets/pic_portfolio.png',
-      tags: ['Angular', 'TypeScript', 'Routing', 'Responsive Design','HTML5 / CSS3', 'Animations'],
+      tags: ['Angular', 'Portfolio', 'HTML5/CSS3', 'Responsive Design', 'Animations'],
       route: '/projects/portfolio'
     },
     {
@@ -76,7 +76,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       title: 'Java Microservices Manager',
       description: 'Personal project showcasing a robust, scalable, and fully modular Java-based microservices architecture.',
       image: 'assets/backend.png',
-      tags: ['Java', 'Spring Boot', 'Spring Cloud Config', 'Eureka', 'Spring Cloud Gateway', 'Spring Mail', 'CQRS', 'Docker', 'JUnit'],
+      tags: ['Java', 'Spring Boot', 'Microservices', 'Spring Cloud', 'CQRS', 'Docker', 'JUnit'],
       route: '/projects/microservices'
     },
   ];
@@ -358,10 +358,227 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           ease: 'none'
         });
 
+        if (window.innerWidth > 768) {
+          this.initDesktopCards();
+        }
+
+        if (window.innerWidth <= 768) {
+          this.initMobileDeck();
+        }
+
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 300);
+
       }, 100);
     }
 
 }
+
+  private initMobileDeck() {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.projects-grid .project-card'));
+    const grid = document.querySelector<HTMLElement>('.projects-grid');
+
+    if (!cards.length || !grid) return;
+
+    const total = cards.length;
+
+    const cardHeight = cards[0].offsetHeight;
+    gsap.set(grid, { position: 'relative', height: cardHeight, force3D: true });
+
+    cards.forEach(card => {
+      gsap.set(card, { position: 'absolute', top: 0, left: 0, width: '100%',
+        willChange: 'transform',  // ← diz ao browser para reservar GPU layer
+        force3D: true
+      });
+    });
+
+    cards.forEach((card, i) => {
+      const depth = total - 1 - i;
+      gsap.set(card, {
+        y: depth * 15,
+        rotation: depth * 3 * (i % 2 === 0 ? 1 : -1),
+        scale: 1 - depth * 0.05,
+        zIndex: total - i,
+      });
+    });
+
+    ScrollTrigger.create({
+      trigger: grid,
+      start: 'top 20%',
+      end: `+=${window.innerHeight * total }`,  // espaço proporcional ao número de cards *.5
+      pin: true,
+      pinSpacing: true,
+      markers: false,
+      id: 'projects-grid',
+      onUpdate: (self) => {
+        const p = self.progress;
+        const step = 1 / total;
+        const goingDown = self.direction === 1;
+
+        cards.forEach((card, i) => {
+          if (i === total - 1) return;
+
+          const start = i * step;
+          const localP = Math.max(0, Math.min(1, (p - start) / step));
+
+          // Card já saiu completamente
+          if (localP === 1) {
+            const dir = i % 2 === 0 ? -1 : 1;
+            gsap.set(card, {
+              x: dir * window.innerWidth,
+              y: -40, scale: 1.08,
+              rotation: dir * 30,
+              opacity: 0, zIndex: 0
+            });
+            return;
+          }
+
+          // Card ainda não foi ativado — atualiza a pilha
+          if (localP === 0) {
+            const cardsSaidos = cards.filter((_, j) => {
+              if (j >= i) return false;
+              const lp = Math.max(0, Math.min(1, (p - j * step) / step));
+              return lp === 1;
+            }).length;
+            const depth = (total - 1 - i) - cardsSaidos;
+
+            // scroll UP — desliza suavemente de volta
+            gsap.to(card, {
+              x: 0,
+              y: Math.max(0, depth) * 15,
+              rotation: Math.max(0, depth) * 3 * (i % 2 === 0 ? 1 : -1),
+              scale: 1 - Math.max(0, depth) * 0.05,
+              opacity: 1,
+              zIndex: total - i,
+              duration: goingDown ? 0 : 0.35,   // ← UP tem duration, DOWN é set
+              ease: 'power2.out',
+              overwrite: 'auto',
+              force3D: true,
+            });
+            return;
+          }
+
+          // Atualiza cards atrás
+          cards.forEach((otherCard, j) => {
+            if (j <= i || j === total - 1) return;
+            const jLocalP = Math.max(0, Math.min(1, (p - j * step) / step));
+            if (jLocalP > 0) return;
+            const depth = (total - 1 - j) - localP;
+            gsap.set(otherCard, {
+              x: 0,
+              y: Math.max(0, depth) * 15,
+              rotation: Math.max(0, depth) * 3 * (j % 2 === 0 ? 1 : -1),
+              scale: 1 - Math.max(0, depth) * 0.05,
+              opacity: 1, zIndex: total - j,
+              force3D: true,
+            });
+          });
+
+          // Fase de subida — DOWN scrub normal, UP com to() suave
+          if (localP <= 0.4) {
+            const t = localP / 0.4;
+            const ease = 1 - Math.pow(1 - t, 3);
+            if (goingDown) {
+              gsap.set(card, {
+                x: 0, y: -44 * ease,
+                scale: 1 + 0.07 * ease,
+                rotation: 0, opacity: 1,
+                zIndex: 9999, force3D: true,
+              });
+            } else {
+              // scroll UP — anima suavemente de volta à posição da pilha
+              gsap.to(card, {
+                x: 0, y: 0,
+                scale: 1, rotation: 0,
+                opacity: 1, zIndex: total - i,
+                duration: 0.4,
+                ease: 'power2.out',
+                overwrite: 'auto',
+                force3D: true,
+              });
+            }
+          } else if (localP <= 0.6) {
+            gsap.set(card, {
+              x: 0, y: -40, scale: 1.08,
+              rotation: 0, opacity: 1,
+              zIndex: goingDown ? 9999 : total - i,
+              force3D: true,
+            });
+          } else {
+            const t = (localP - 0.6) / 0.4;
+            const ease = t * t * t;
+            const dir = i % 2 === 0 ? -1 : 1;
+            gsap.set(card, {
+              x: dir * window.innerWidth * 1.2 * ease,
+              y: -40, scale: 1.08 - ease * 0.1,
+              rotation: dir * 30 * ease,
+              opacity: 1 - ease,
+              zIndex: goingDown ? 9999 : total - i,
+              force3D: true,
+            });
+          }
+        });
+      }
+    });
+  }
+
+  private initDesktopCards() {
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>('.projects-grid .project-card')
+    );
+
+    // 1. Stagger entrance ao scroll
+    gsap.fromTo(cards,
+      { y: 60, opacity: 0, scale: 0.95 },
+      {
+        y: 0, opacity: 1, scale: 1,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: '.projects-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+
+    // 2. Hover 3D tilt por card
+    cards.forEach(card => {
+      const onMove = (e: MouseEvent) => {
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / (rect.width / 2);   // -1 a 1
+        const dy = (e.clientY - cy) / (rect.height / 2);  // -1 a 1
+
+        gsap.to(card, {
+          rotateY: dx * 8,          // máx 8° horizontal
+          rotateX: -dy * 5,         // máx 5° vertical
+          scale: 1.03,
+          boxShadow: `${-dx * 12}px ${-dy * 8}px 30px rgba(0,0,0,0.25)`,
+          duration: 0.4,
+          ease: 'power2.out',
+          transformPerspective: 800,
+          force3D: true,
+        });
+      };
+
+      const onLeave = () => {
+        gsap.to(card, {
+          rotateY: 0, rotateX: 0, scale: 1,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          duration: 0.5,
+          ease: 'power3.out',
+          force3D: true,
+        });
+      };
+
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+    });
+  }
 
   goToProject(route: string) {
     this.router.navigate([route]).then(() => {
