@@ -296,3 +296,7 @@ strong {
   transform: translateY(0);
   will-change: auto; /* Remove a dica após a animação */
 }
+
+.home-page .scroll-progress-btn {
+  bottom: 120px !important;
+}

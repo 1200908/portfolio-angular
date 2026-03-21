@@ -6,7 +6,7 @@ import {
   Inject,
   ViewChild,
   HostListener,
-  OnInit, OnDestroy, ChangeDetectorRef
+  OnInit, OnDestroy, ChangeDetectorRef, NgZone
 } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
@@ -93,7 +93,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       behavior: 'smooth'
     });
   }
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
   goToEducation() {
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
@@ -129,6 +129,21 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
+
+
+        const bg = document.querySelector('.hero-background') as HTMLElement;
+
+        ScrollTrigger.create({
+          trigger: '.hero-section',
+          start: 'bottom 80%',
+          onEnter: () => {
+            this.paused = true;  // pausa a animação quando scroll entra
+          },
+          onLeaveBack: () => {
+            this.paused = false; // retoma a animação quando scroll volta
+          },
+        });
+
         if (isPlatformBrowser(this.platformId)) {
           setTimeout(() => {
 
@@ -258,16 +273,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         );
 
 // Saída para a direita
-        gsap.to('.tech-stack-section .section-title', {
-          x: 60, rotation: 8, opacity: 0, immediateRender: false,
-          scrollTrigger: {
-            trigger: '.tech-stack-section',
-            start: 'top 10%',
-            end: 'top -20%',
-            scrub: true
-          },
-          ease: 'none'
-        });
+
 
 
         gsap.utils.toArray<Element>('.tech-item').forEach((item, i) => {
@@ -335,28 +341,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           }
         );
 
-        // Saída para o lado oposto
-        gsap.to('.projects-section .section-title', {
-          x: 60, rotation: 8, opacity: 0, immediateRender: false,
-          scrollTrigger: {
-            trigger: '.projects-section',
-            start: 'top 10%',
-            end: 'top -20%',
-            scrub: true
-          },
-          ease: 'none'
-        });
 
-        gsap.to('.projects-section .section-subtitle', {
-          x: -60, rotation: -8, opacity: 0, immediateRender: false,
-          scrollTrigger: {
-            trigger: '.projects-section',
-            start: 'top 10%',
-            end: 'top -20%',
-            scrub: true
-          },
-          ease: 'none'
-        });
 
         if (window.innerWidth > 768) {
           this.initDesktopCards();
@@ -376,150 +361,259 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 }
 
   private initMobileDeck() {
+    const header = document.querySelector<HTMLElement>('.projects-header');
+    const headerTitle = header?.querySelector<HTMLElement>('.section-title') ?? null;
+    const headerSubtitle = header?.querySelector<HTMLElement>('.section-subtitle') ?? null;
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.projects-grid .project-card'));
     const grid = document.querySelector<HTMLElement>('.projects-grid');
+
 
     if (!cards.length || !grid) return;
 
     const total = cards.length;
+    const STEPS = 120;
+    const ANIMATE_COUNT = total - 1; // último card nunca sai
 
-    const cardHeight = cards[0].offsetHeight;
+    if (header) {
+      const headerHeight = header.offsetHeight;
+      const placeholder = document.createElement('div');
+      placeholder.style.height = `${headerHeight}px`;
+      placeholder.style.pointerEvents = 'none';
+
+      let inserted = false;
+
+      ScrollTrigger.create({
+        trigger: grid,
+        start: 'top 20%',
+        end: `+=${window.innerHeight * total}`,
+        onEnter: () => {
+          if (header) {
+            header.classList.add('is-fixed');
+            if (!inserted) {
+              header.parentElement?.insertBefore(placeholder, header);
+              inserted = true;
+            }
+          }
+        },
+
+        onLeave: () => {
+          if (header) {
+            gsap.to(headerTitle, {
+              x: -80, rotation: -10, opacity: 0,
+              duration: 0.45, ease: 'power2.in'
+            });
+            gsap.to(headerSubtitle, {
+              x: 80, rotation: 10, opacity: 0,
+              duration: 0.35, ease: 'power2.in',
+              delay: 0.05,
+              onComplete: () => {
+                header.classList.remove('is-fixed');
+                if (inserted) { placeholder.remove(); inserted = false; }
+                gsap.set([headerTitle, headerSubtitle], { clearProps: 'all' });
+              }
+            });
+          }
+        },
+
+        onEnterBack: () => {
+          if (header) {
+            header.classList.add('is-fixed');
+            if (!inserted) {
+              header.parentElement?.insertBefore(placeholder, header);
+              inserted = true;
+            }
+            gsap.set(header, { clearProps: 'all' });
+
+            gsap.fromTo(headerTitle,
+              { x: -60, opacity: 0, rotation: -8 },
+              { x: 0, opacity: 1, rotation: 0, duration: 0.5, ease: 'power3.out' }
+            );
+            gsap.fromTo(headerSubtitle,
+              { x: 60, opacity: 0, rotation: 8 },
+              { x: 0, opacity: 1, rotation: 0, duration: 0.5, ease: 'power3.out', delay: 0.1 }
+            );
+          }
+        },
+
+        onLeaveBack: () => {
+          if (header) {
+            gsap.to(headerTitle, {
+              x: 60,        // sai para a direita
+              opacity: 0,
+              scale: 0.9,
+              duration: 0.35,
+              ease: 'power2.in'
+            });
+
+            gsap.to(headerSubtitle, {
+              x: 60,        // idem
+              opacity: 0,
+              scale: 0.9,
+              duration: 0.3,
+              ease: 'power2.in',
+              delay: 0.05,
+              onComplete: () => {
+                header.classList.remove('is-fixed');
+                if (inserted) { placeholder.remove(); inserted = false; }
+                gsap.set([headerTitle, headerSubtitle], { clearProps: 'all' });
+              }
+            });
+          }
+        },
+      });
+    }
+
+    type CardState = {
+      x: number; y: number;
+      scale: number; rotation: number;
+      opacity: number; zIndex: number;
+    };
+
+    const easeInCubic  = (t: number) => t * t * t;
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const cardHeight  = cards[0].offsetHeight;
+    const screenWidth = window.innerWidth;
+
     gsap.set(grid, { position: 'relative', height: cardHeight, force3D: true });
 
     cards.forEach(card => {
-      gsap.set(card, { position: 'absolute', top: 0, left: 0, width: '100%',
-        willChange: 'transform',  // ← diz ao browser para reservar GPU layer
-        force3D: true
-      });
-    });
-
-    cards.forEach((card, i) => {
-      const depth = total - 1 - i;
       gsap.set(card, {
-        y: depth * 15,
-        rotation: depth * 3 * (i % 2 === 0 ? 1 : -1),
-        scale: 1 - depth * 0.05,
-        zIndex: total - i,
+        position: 'absolute', top: 0, left: 0, width: '100%',
+        willChange: 'transform, opacity',
+        force3D: true,
       });
     });
 
+    // ─────────────────────────────────────────────
+    // PRÉ-CÁLCULO
+    // ─────────────────────────────────────────────
+    const stateTable: CardState[][] = cards.map((_, i) => {
+      const depth0 = total - 1 - i;
+      const dir    = i % 2 === 0 ? -1 : 1;
+
+      // ── último card: estado fixo para sempre ─────
+      if (i === total - 1) {
+        const fixedState: CardState = {
+          x: 0, y: 0,
+          scale: 1, rotation: 0,
+          opacity: 1, zIndex: 1,
+        };
+        return Array(STEPS + 1).fill(fixedState);
+      }
+
+      // só os primeiros ANIMATE_COUNT cards têm step próprio
+      const step  = 1 / ANIMATE_COUNT;
+      const start = i * step;
+
+      const states: CardState[] = [];
+
+      for (let s = 0; s <= STEPS; s++) {
+        const p      = s / STEPS;
+        const localP = Math.max(0, Math.min(1, (p - start) / step));
+
+        // ── ainda não activado ───────────────────────
+        if (localP === 0) {
+          const saidos = Array.from({ length: i }, (_, j) => {
+            const lp = Math.max(0, Math.min(1, (p - j * step) / step));
+            return lp >= 1 ? 1 : 0;
+          }).reduce((a: number, b: number) => a + b, 0);
+
+          const depth = Math.max(0, depth0 - saidos);
+          states.push({
+            x: 0,
+            y: depth * 15,
+            rotation: depth * 3 * (i % 2 === 0 ? 1 : -1),
+            scale: 1 - depth * 0.05,
+            opacity: 1,
+            zIndex: total - i,
+          });
+          continue;
+        }
+
+        // ── já saiu ──────────────────────────────────
+        if (localP >= 1) {
+          states.push({
+            x: dir * screenWidth * 1.5,
+            y: -40, scale: 1.08,
+            rotation: dir * 30,
+            opacity: 0, zIndex: 0,
+          });
+          continue;
+        }
+
+        // ── em animação ──────────────────────────────
+        if (localP <= 0.4) {
+          const t    = localP / 0.4;
+          const ease = easeOutCubic(t);
+          states.push({
+            x: 0, y: -44 * ease,
+            scale: 1 + 0.07 * ease,
+            rotation: 0, opacity: 1,
+            zIndex: 9999,
+          });
+        } else if (localP <= 0.6) {
+          states.push({
+            x: 0, y: -40, scale: 1.08,
+            rotation: 0, opacity: 1,
+            zIndex: 9999,
+          });
+        } else {
+          const t    = (localP - 0.6) / 0.4;
+          const ease = easeInCubic(t);
+          states.push({
+            x: dir * screenWidth * 1.2 * ease,
+            y: -40, scale: 1.08 - ease * 0.1,
+            rotation: dir * 30 * ease,
+            opacity: 1 - ease,
+            zIndex: 9999,
+          });
+        }
+      }
+
+      return states;
+    });
+
+    // ─────────────────────────────────────────────
+    // quickSetters
+    // ─────────────────────────────────────────────
+    const setters = cards.map(card => ({
+      x:        gsap.quickSetter(card, 'x', 'px')         as (v: number) => void,
+      y:        gsap.quickSetter(card, 'y', 'px')         as (v: number) => void,
+      scale:    gsap.quickSetter(card, 'scale')           as (v: number) => void,
+      rotation: gsap.quickSetter(card, 'rotation', 'deg') as (v: number) => void,
+      opacity:  gsap.quickSetter(card, 'opacity')         as (v: number) => void,
+    }));
+
+    const applyState = (card: HTMLElement, s: CardState, qi: typeof setters[0]) => {
+      qi.x(s.x);
+      qi.y(s.y);
+      qi.scale(s.scale);
+      qi.rotation(s.rotation);
+      qi.opacity(s.opacity);
+      card.style.zIndex = String(s.zIndex);
+    };
+
+    // estado inicial
+    cards.forEach((card, i) => applyState(card, stateTable[i][0], setters[i]));
+
+    // ─────────────────────────────────────────────
+    // SCROLL TRIGGER
+    // ─────────────────────────────────────────────
     ScrollTrigger.create({
       trigger: grid,
-      start: 'top 20%',
-      end: `+=${window.innerHeight * total }`,  // espaço proporcional ao número de cards *.5
+      start: 'top 30%',        // ← topo do grid cola ao topo do viewport
+      end: `+=${window.innerHeight * total}`,
       pin: true,
       pinSpacing: true,
       markers: false,
       id: 'projects-grid',
-      onUpdate: (self) => {
-        const p = self.progress;
-        const step = 1 / total;
-        const goingDown = self.direction === 1;
-
+      onUpdate(self) {
+        const idx = Math.min(STEPS, Math.floor(self.progress * STEPS));
         cards.forEach((card, i) => {
-          if (i === total - 1) return;
-
-          const start = i * step;
-          const localP = Math.max(0, Math.min(1, (p - start) / step));
-
-          // Card já saiu completamente
-          if (localP === 1) {
-            const dir = i % 2 === 0 ? -1 : 1;
-            gsap.set(card, {
-              x: dir * window.innerWidth,
-              y: -40, scale: 1.08,
-              rotation: dir * 30,
-              opacity: 0, zIndex: 0
-            });
-            return;
-          }
-
-          // Card ainda não foi ativado — atualiza a pilha
-          if (localP === 0) {
-            const cardsSaidos = cards.filter((_, j) => {
-              if (j >= i) return false;
-              const lp = Math.max(0, Math.min(1, (p - j * step) / step));
-              return lp === 1;
-            }).length;
-            const depth = (total - 1 - i) - cardsSaidos;
-
-            // scroll UP — desliza suavemente de volta
-            gsap.to(card, {
-              x: 0,
-              y: Math.max(0, depth) * 15,
-              rotation: Math.max(0, depth) * 3 * (i % 2 === 0 ? 1 : -1),
-              scale: 1 - Math.max(0, depth) * 0.05,
-              opacity: 1,
-              zIndex: total - i,
-              duration: goingDown ? 0 : 0.35,   // ← UP tem duration, DOWN é set
-              ease: 'power2.out',
-              overwrite: 'auto',
-              force3D: true,
-            });
-            return;
-          }
-
-          // Atualiza cards atrás
-          cards.forEach((otherCard, j) => {
-            if (j <= i || j === total - 1) return;
-            const jLocalP = Math.max(0, Math.min(1, (p - j * step) / step));
-            if (jLocalP > 0) return;
-            const depth = (total - 1 - j) - localP;
-            gsap.set(otherCard, {
-              x: 0,
-              y: Math.max(0, depth) * 15,
-              rotation: Math.max(0, depth) * 3 * (j % 2 === 0 ? 1 : -1),
-              scale: 1 - Math.max(0, depth) * 0.05,
-              opacity: 1, zIndex: total - j,
-              force3D: true,
-            });
-          });
-
-          // Fase de subida — DOWN scrub normal, UP com to() suave
-          if (localP <= 0.4) {
-            const t = localP / 0.4;
-            const ease = 1 - Math.pow(1 - t, 3);
-            if (goingDown) {
-              gsap.set(card, {
-                x: 0, y: -44 * ease,
-                scale: 1 + 0.07 * ease,
-                rotation: 0, opacity: 1,
-                zIndex: 9999, force3D: true,
-              });
-            } else {
-              // scroll UP — anima suavemente de volta à posição da pilha
-              gsap.to(card, {
-                x: 0, y: 0,
-                scale: 1, rotation: 0,
-                opacity: 1, zIndex: total - i,
-                duration: 0.4,
-                ease: 'power2.out',
-                overwrite: 'auto',
-                force3D: true,
-              });
-            }
-          } else if (localP <= 0.6) {
-            gsap.set(card, {
-              x: 0, y: -40, scale: 1.08,
-              rotation: 0, opacity: 1,
-              zIndex: goingDown ? 9999 : total - i,
-              force3D: true,
-            });
-          } else {
-            const t = (localP - 0.6) / 0.4;
-            const ease = t * t * t;
-            const dir = i % 2 === 0 ? -1 : 1;
-            gsap.set(card, {
-              x: dir * window.innerWidth * 1.2 * ease,
-              y: -40, scale: 1.08 - ease * 0.1,
-              rotation: dir * 30 * ease,
-              opacity: 1 - ease,
-              zIndex: goingDown ? 9999 : total - i,
-              force3D: true,
-            });
-          }
+          applyState(card, stateTable[i][idx], setters[i]);
         });
-      }
+      },
     });
   }
 
@@ -611,11 +705,19 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     { class: 'fa fa-cubes',     x: 78, y: 60, vx: 0, vy: 0, duration: 11, delay: 3 },
     { class: 'fa fa-database',  x: 42, y: 20, vx: 0, vy: 0, duration: 14, delay: 4 },
     { class: 'fa fa-lock',      x: 15, y: 50, vx: 0, vy: 0, duration: 10, delay: 5 },
+    { class: 'fab fa-react',       x: 22, y: 18, vx: 0, vy: 0, duration: 11, delay: 0.8 },  // React (tens no blog)
+    { class: 'fab fa-npm',         x: 50, y: 40, vx: 0, vy: 0, duration: 9,  delay: 1.8 },  // npm / Node ecosystem
+    { class: 'fa fa-server',       x: 85, y: 78, vx: 0, vy: 0, duration: 13, delay: 2.3 },  // microservices/servidor
+    { class: 'fa fa-network-wired',x: 35, y: 72, vx: 0, vy: 0, duration: 10, delay: 3.2 },  // redes / telecom
+    { class: 'fa fa-shield-alt',   x: 63, y: 35, vx: 0, vy: 0, duration: 12, delay: 4.1 },  // segurança / JWT
+    { class: 'fa fa-code-branch',  x: 7,  y: 60, vx: 0, vy: 0, duration: 8,  delay: 5.2 },  // git branching
+    { class: 'fa fa-cogs',         x: 95, y: 20, vx: 0, vy: 0, duration: 14, delay: 0.3 },  // configuração / Spring Cloud
+    { class: 'fa fa-exchange-alt', x: 48, y: 90, vx: 0, vy: 0, duration: 11, delay: 6.0 },  // Rabb
   ];
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.startAnimation();  // ← nome diferente
+        this.startAnimation();
     }
   }
   ngOnDestroy() {
@@ -633,35 +735,46 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     this.mouseY = (e.clientY / window.innerHeight) * 100;
   }
 
+  private paused = false; // controla se a animação está pausada
+
   startAnimation() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    this.icons = this.icons.map(icon => {
-      const dx = icon.x - this.mouseX;
-      const dy = icon.y - this.mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const repelRadius = 15;
+    // evita múltiplos loops
+    if (this.animationId) return;
 
-      if (dist < repelRadius && dist > 0) {
-        const force = (repelRadius - dist) / repelRadius;
-        icon.vx += (dx / dist) * force * 0.5;
-        icon.vy += (dy / dist) * force * 0.5;
+    const animate = () => {
+      if (!this.paused) {
+        this.icons = this.icons.map(icon => {
+          const dx = icon.x - this.mouseX;
+          const dy = icon.y - this.mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const repelRadius = 15;
+
+          if (dist < repelRadius && dist > 0) {
+            const force = (repelRadius - dist) / repelRadius;
+            icon.vx += (dx / dist) * force * 0.5;
+            icon.vy += (dy / dist) * force * 0.5;
+          }
+
+          icon.vx *= 0.92;
+          icon.vy *= 0.92;
+          icon.x  += icon.vx;
+          icon.y  += icon.vy;
+
+          if (icon.x < 0)  { icon.x = 0;  icon.vx *= -1; }
+          if (icon.x > 95) { icon.x = 95; icon.vx *= -1; }
+          if (icon.y < 0)  { icon.y = 0;  icon.vy *= -1; }
+          if (icon.y > 90) { icon.y = 90; icon.vy *= -1; }
+
+          return icon;
+        });
       }
 
-      icon.vx *= 0.92;
-      icon.vy *= 0.92;
-      icon.x  += icon.vx;
-      icon.y  += icon.vy;
+      this.animationId = requestAnimationFrame(animate);
+    };
 
-      if (icon.x < 0)  { icon.x = 0;  icon.vx *= -1; }
-      if (icon.x > 95) { icon.x = 95; icon.vx *= -1; }
-      if (icon.y < 0)  { icon.y = 0;  icon.vy *= -1; }
-      if (icon.y > 90) { icon.y = 90; icon.vy *= -1; }
-
-      return icon;
-    });
-
-    this.animationId = requestAnimationFrame(() => this.startAnimation());
+    animate();
   }
 
 

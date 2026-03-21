@@ -370,6 +370,23 @@
   background: #f8f9fa;
 }
 
+.projects-header {
+  /* reserva o espaço mesmo quando o título vai para fixed */
+  min-height: 120px;
+}
+
+/* estado fixo — aplicado via GSAP, mas precisas disto como base */
+.projects-header.is-fixed {
+  position: fixed;
+  top: 70px; /* altura da tua navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -589,12 +606,12 @@
   }
 
   .section-title {
-    margin-bottom: 1.5rem; /* reduzido */
+    margin-bottom: 1rem; /* reduzido */
     font-size: 2rem; /* opcional: também ajuda no mobile */
   }
 
   .section-subtitle {
-    margin-bottom: 1.5rem; /* reduzido */
+    margin-bottom: 1rem; /* reduzido */
     font-size: 1rem; /* opcional */
   }
 }

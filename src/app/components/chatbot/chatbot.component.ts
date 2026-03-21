@@ -1,10 +1,23 @@
-import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewChecked,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+  ChangeDetectorRef
+} from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { RouterLink } from "@angular/router";
-import { CommonModule } from "@angular/common";
+import {Router, RouterLink} from "@angular/router";
+import {CommonModule, isPlatformBrowser} from "@angular/common";
 import { TimelineComponent } from "../timeline/timeline.component";
 import { FormsModule } from "@angular/forms";
 import { firstValueFrom } from "rxjs";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+
 
 interface Message {
   text: string;
@@ -25,7 +38,7 @@ interface Message {
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.css']
 })
-export class ChatbotComponent implements AfterViewChecked {
+export class ChatbotComponent implements AfterViewChecked, AfterViewInit {
   @ViewChild('chatBody') private chatBody!: ElementRef;
 
   chatVisible = false;
@@ -55,6 +68,65 @@ export class ChatbotComponent implements AfterViewChecked {
     '🌍 Where are you based?'
   ];
 
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+    // 1. Entrada animada ao carregar
+    gsap.fromTo('.chat-icon',
+      { scale: 0, rotation: -180, opacity: 0 },
+      {
+        scale: 1, rotation: 0, opacity: 1,
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        delay: 2.5  // aparece depois das animações hero
+      }
+    );
+
+    // 2. Wiggle periódico para chamar atenção
+    gsap.delayedCall(4, () => this.startWiggle());
+      }, 100);
+    }
+  }
+
+  private startWiggle() {
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 8  // wiggle a cada 8s
+    });
+
+    tl.to('.chat-icon', {
+      rotation: -15, duration: 0.1, ease: 'power2.inOut'
+    })
+      .to('.chat-icon', {
+        rotation: 15, duration: 0.1, ease: 'power2.inOut'
+      })
+      .to('.chat-icon', {
+        rotation: -10, duration: 0.08, ease: 'power2.inOut'
+      })
+      .to('.chat-icon', {
+        rotation: 10, duration: 0.08, ease: 'power2.inOut'
+      })
+      .to('.chat-icon', {
+        rotation: 0, duration: 0.06, ease: 'power2.out'
+      });
+
+    ScrollTrigger.create({
+      trigger: '.cta-section',
+      start: 'top 80%',
+      onEnter: () => {
+        gsap.fromTo('.chat-icon',
+          { y: 0 },
+          {
+            y: -20, duration: 0.3, ease: 'power2.out',
+            yoyo: true, repeat: 3
+          }
+        );
+      },
+      once: false  // só dispara uma vez
+    });
+  }
+
   get currentSuggestions(): string[] {
     // Se só tem a mensagem de boas-vindas, mostra iniciais
     if (this.messages.length <= 1) {
@@ -63,7 +135,7 @@ export class ChatbotComponent implements AfterViewChecked {
     // Depois da primeira pergunta, mostra detalhadas
     return this.detailedSuggestions;
   }
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   openChat() {
     this.chatVisible = true;

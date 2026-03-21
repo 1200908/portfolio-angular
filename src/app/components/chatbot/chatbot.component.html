@@ -1,7 +1,7 @@
 <!-- src/app/components/chatbot/chatbot.component.html -->
 
 <!-- Ícone do Chat (sempre visível) -->
-<div class="chat-icon" (click)="openChat()" *ngIf="!chatVisible">
+<div class="chat-icon" (click)="openChat()" [hidden]="chatVisible">
   <img src="assets/carton.jpg" alt="Jorge Vieira">
 </div>
 
