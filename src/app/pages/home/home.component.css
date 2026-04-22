@@ -37,7 +37,7 @@
    ============================================ */
 .hero-section {
   position: relative;
-  min-height: 99vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,6 +177,7 @@
   line-height: 1.2;
   animation: fadeInUp 1s ease;
   font-family: 'Fraunces', serif;
+  padding-top: 30px;
 }
 
 .name-highlight {
@@ -685,6 +686,9 @@
   max-width: 150px;
   justify-self: center;
   visibility: hidden;
+  margin: 0 auto;
+  display: block;
+
 }
 
 
@@ -699,8 +703,8 @@
   }
 
   .hero-subtitle {
-    font-size: 1.2rem;
-    min-height: calc(1.4em * 3);
+    font-size: 1.4rem;
+    min-height: calc(1.8em * 2);
     margin-bottom: 0;
   }
   .hero-description {
@@ -771,6 +775,9 @@
     margin-bottom: .4rem;
     gap: 2px;
   }
+  .scroll-indicator {
+    bottom: 60px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -788,10 +795,13 @@
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: .8rem;
     margin-bottom: 0rem;
     min-height: calc(1.4em * 1)
 
+  }
+  .scroll-indicator {
+    bottom: 40px;
   }
 
 }
@@ -815,3 +825,8 @@
 }
 
 
+@supports (-webkit-touch-callout: none) {
+  .hero {
+    min-height: 100vh;
+  }
+}

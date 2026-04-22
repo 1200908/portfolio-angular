@@ -15,8 +15,8 @@ import {TimelineComponent} from "../../components/timeline/timeline.component";
 import { ChatbotComponent } from '../../components/chatbot/chatbot.component';
 import {ScrollRevealDirective} from '../../shared/directives/scroll-reveal.directive';
 import { gsap } from 'gsap';
+import { Observer } from 'gsap/Observer';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 interface FloatingIcon {
   class: string;
   x: number;
@@ -83,6 +83,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     },
   ];
 
+
+
   lottieOptions: AnimationOptions = {
     path: 'assets/computer_operator_typing.json',
     loop: true,
@@ -114,8 +116,15 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('projectSubtitle') projectSubtitle?: ElementRef;
 
   typed?: Typed;
+
+
   ngAfterViewInit() {
     this.cdr.detectChanges();
+
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (isPlatformBrowser(this.platformId)) {
+      gsap.registerPlugin(ScrollTrigger, Observer);
+    }
 
     if (isPlatformBrowser(this.platformId) && this.typedElement) {
       const element = this.typedElement.nativeElement;
@@ -205,12 +214,12 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           gsap.fromTo('.hero-description',
             { y: 0, opacity: 1, filter: 'blur(0px)' },
             {
-              y: 30, opacity: 0, filter: 'blur(5px)',
+              y: 80, opacity: 0, filter: 'blur(5px)',
               immediateRender: false,
               scrollTrigger: {
                 trigger: '.hero-section',
-                start: 'top top',
-                end: '+=300',
+                start: 'bottom 90%',
+                end: '+=500',
                 scrub: 1.5
               },
               ease: 'none'
@@ -275,7 +284,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           scrollTrigger: {
             trigger: '.hero-section',
             start: 'top top',
-            end: '+=150',
+            end: '+=75',
             scrub: true
           },
           opacity: 0,
@@ -367,12 +376,20 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         );
 
 
+        const width = window.innerWidth;
 
-        if (window.innerWidth > 768) {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const isIOSSafari = isIOS && isSafari;
+
+        const isSamsungInternet = /SamsungBrowser/i.test(navigator.userAgent);
+
+        const forceDesktopAnimations =
+          isIOSSafari || isSamsungInternet;
+
+        if (width > 768 || forceDesktopAnimations) {
           this.initDesktopCards();
-        }
-
-        if (window.innerWidth <= 768) {
+        } else {
           this.initMobileDeck();
         }
 
@@ -385,6 +402,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
 }
+
+
 
   private initMobileDeck() {
     const header = document.querySelector<HTMLElement>('.projects-header');
@@ -407,11 +426,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       placeholder.style.pointerEvents = 'none';
 
       let inserted = false;
+      const vh = document.documentElement.clientHeight;
+
 
       ScrollTrigger.create({
         trigger: grid,
         start: 'top 20%',
-        end: `+=${window.innerHeight * total}`,
+        end: `+=${ vh * total}`,
         onEnter: () => {
           if (header) {
             header.classList.add('is-fixed');
@@ -507,13 +528,11 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     const cardHeight  = cards[0].offsetHeight;
     const screenWidth = window.innerWidth;
 
-    gsap.set(grid, { position: 'relative', height: cardHeight, force3D: true });
+    gsap.set(grid, { position: 'relative', height: cardHeight });
 
     cards.forEach(card => {
       gsap.set(card, {
         position: 'absolute', top: 0, left: 0, width: '100%',
-        willChange: 'transform, opacity',
-        force3D: true,
       });
     });
 
@@ -632,12 +651,15 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     // ─────────────────────────────────────────────
     // SCROLL TRIGGER
     // ─────────────────────────────────────────────
+    const vh = document.documentElement.clientHeight;
+
     ScrollTrigger.create({
       trigger: grid,
       start: 'top 30%',        // ← topo do grid cola ao topo do viewport
-      end: `+=${window.innerHeight * total}`,
+      end: `+=${vh * total}`,
       pin: true,
       pinSpacing: true,
+      anticipatePin: 1,
       markers: false,
       id: 'projects-grid',
       onUpdate(self) {
@@ -687,7 +709,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           duration: 0.4,
           ease: 'power2.out',
           transformPerspective: 800,
-          force3D: true,
         });
       };
 
@@ -697,7 +718,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
           duration: 0.5,
           ease: 'power3.out',
-          force3D: true,
         });
       };
 
