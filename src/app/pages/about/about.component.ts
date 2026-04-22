@@ -12,15 +12,19 @@ export class AboutComponent {
   constructor(private router: Router) { }
   goToHome() {
     this.router.navigate(['/']).then(() => {
-      const el = document.getElementById('container-principals');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const el = document.getElementById('home');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
     });
   }
 
   goToProjects() {
     this.router.navigate(['/']).then(() => {
-      const el = document.getElementById('projects');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const el = document.getElementById('projects');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // espera o HomeComponent + GSAP inicializarem
     });
   }
 }

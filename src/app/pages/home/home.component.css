@@ -6,9 +6,6 @@
   .hero-image {
     align-self: center;
   }
-  .hero-section {
-    margin-top: 50px;
-  }
 }
 
 .hero-subtitle,
@@ -40,12 +37,12 @@
    ============================================ */
 .hero-section {
   position: relative;
-  min-height: 100vh;
+  min-height: 99vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent; /* transparente para ver os blobs fixos */
-  padding: 80px 20px 60px;
+  padding: 20px 20px 60px;
   overflow: visible;
 }
 
@@ -166,7 +163,12 @@
   color: white;
   text-align: center;
   align-items: center;
-}
+  backdrop-filter: blur(3px);
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
 
 .hero-title {
   font-size: 3.5rem;
@@ -197,6 +199,10 @@
   line-height: 1.8;
   margin-bottom: 2rem;
   opacity: 0.9;
+  max-width: 700px;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
   /*animation: fadeInUp 1s ease 0.4s backwards;*/
 }
 
@@ -331,8 +337,15 @@
   position: absolute;
   bottom: 30px;
   left: 50%;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.45);
   transform: translateX(-50%);
-  color: white;
+  color: rgba(102, 126, 234, 0.5);
   font-size: 2rem;
   animation: bounce 2s infinite;
   cursor: pointer;
@@ -366,7 +379,7 @@
    TECH STACK SECTION
    ============================================ */
 .tech-stack-section {
-  padding: 80px 20px;
+  padding: 20px 20px;
   background: #f8f9fa;
 }
 
@@ -593,6 +606,7 @@
   font-weight: 600;
   text-decoration: none;
   transition: gap 0.3s ease;
+  cursor: pointer;
 }
 
 .project-details-link:hover {
@@ -666,19 +680,32 @@
   color: #ffff;
 }
 
+.hero-lottie {
+  width: 100%;
+  max-width: 150px;
+  justify-self: center;
+  visibility: hidden;
+}
+
+
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
-    margin-top: 50px;
+    margin-top: 10px;
 
   }
 
   .hero-subtitle {
     font-size: 1.2rem;
     min-height: calc(1.4em * 3);
+    margin-bottom: 0;
+  }
+  .hero-description {
+
+    margin-bottom: 0;
   }
 
   .hero-content {
@@ -740,8 +767,34 @@
   .project-image-tags .project-tag {
     font-size: 0.7rem;
   }
+  .hero-buttons {
+    margin-bottom: .4rem;
+    gap: 2px;
+  }
 }
 
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2.5rem;
+    margin-top: 40px;
+  }
+
+  .hero-lottie {
+    max-width: 100px;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0rem;
+    min-height: calc(1.4em * 1)
+
+  }
+
+}
 
 
 @keyframes pulse {

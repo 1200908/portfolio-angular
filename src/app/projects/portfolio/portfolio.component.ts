@@ -41,11 +41,12 @@ export class PortfolioComponent {
 
   goToHome() {
     this.router.navigate(['/']).then(() => {
-      const el = document.getElementById('projects');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const el = document.getElementById('projects');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
     });
   }
-
   isModalOpen = false;          // controla se está aberto
   modalImageSrc = '';           // caminho da imagem
   modalImageTitle = '';         // título da imagem

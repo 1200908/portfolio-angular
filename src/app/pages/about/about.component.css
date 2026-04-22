@@ -460,6 +460,10 @@ section h2 {
   .card-right {
     padding: 30px 20px;
   }
+  .card-left {
+    margin-top: 10px;
+
+  }
 
   section h2 {
     font-size: 2rem;

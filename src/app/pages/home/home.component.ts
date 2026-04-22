@@ -29,11 +29,13 @@ interface FloatingIcon {
 
 
 import Typed from 'typed.js';
+import {NavbarComponent} from "../../components/navbar/navbar.component";
+import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent, ScrollRevealDirective ],
+  imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent, ScrollRevealDirective, LottieComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -81,6 +83,11 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     },
   ];
 
+  lottieOptions: AnimationOptions = {
+    path: 'assets/computer_operator_typing.json',
+    loop: true,
+    autoplay: true,
+  };
   scrollToProjects() {
     const el = document.getElementById('tech');
     if (!el) return;
@@ -94,6 +101,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
+
   goToEducation() {
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
@@ -160,6 +168,9 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
               .fromTo('.hero-description',
                 { autoAlpha: 0, y: 20, filter: 'blur(6px)' },
                 { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.8 }, '-=0.3')
+              .fromTo('.hero-lottie',          // ← adiciona isto no fim
+                { autoAlpha: 0, x: 80, scale: 0.85 },
+                { autoAlpha: 1, x: 0, scale: 1, duration: 0.8 }, '-=0.4')
               .fromTo('.hero-buttons .btn-primary',
                 { autoAlpha: 0, x: -60 },
                 { autoAlpha: 1, x: 0, duration: 0.5 }, '-=0.3')
@@ -171,7 +182,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                 { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.4 }, '-=0.2')
               .fromTo('.scroll-indicator',
                 { autoAlpha: 0, y: 10 },
-                { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.1');
+                { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.1')
+              ;
 
             const onScroll = () => {
               if (window.scrollY > 10) {
@@ -204,6 +216,19 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
               ease: 'none'
             }
           );
+
+          // Lottie — sai para a direita ao scrollar
+          gsap.to('.hero-lottie', {
+            y: -30, opacity: 0, filter: 'blur(5px)',
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: '.hero-section',
+              start: 'top top',
+              end: '+=400',
+              scrub: 1.5
+            },
+            ease: 'none'
+          });
 
           // Botão primary — sai para a esquerda ao scrollar
           gsap.to('.hero-buttons .btn-primary', {
@@ -355,6 +380,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
           ScrollTrigger.refresh();
         }, 300);
 
+        this.setupIntersectionObserver();
       }, 100);
     }
 
@@ -399,12 +425,18 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         onLeave: () => {
           if (header) {
             gsap.to(headerTitle, {
-              x: -80, rotation: -10, opacity: 0,
-              duration: 0.45, ease: 'power2.in'
+              x:0,
+              y: -40,           // sobe
+              opacity: 0,
+              duration: 0.35,
+              ease: 'power2.in'
             });
             gsap.to(headerSubtitle, {
-              x: 80, rotation: 10, opacity: 0,
-              duration: 0.35, ease: 'power2.in',
+              x:0,
+              y: -40,           // sobe também
+              opacity: 0,
+              duration: 0.35,
+              ease: 'power2.in',
               delay: 0.05,
               onComplete: () => {
                 header.classList.remove('is-fixed');
@@ -715,6 +747,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     { class: 'fa fa-exchange-alt', x: 48, y: 90, vx: 0, vy: 0, duration: 11, delay: 6.0 },  // Rabb
   ];
 
+  activeSection: string = 'home'; // secção atual
+  private observer!: IntersectionObserver;
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
         this.startAnimation();
@@ -726,8 +760,25 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     }
     this.typed?.destroy();
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    if (this.observer) this.observer.disconnect();
   }
 
+  setupIntersectionObserver() {
+    const sections = ['home', 'projects', 'journey'];
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          NavbarComponent.activeSection$.next(entry.target.id);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) this.observer.observe(el);
+    });
+  }
   @HostListener('mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -777,5 +828,12 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     animate();
   }
 
+  goToAbout() {
+    NavbarComponent.activeSection$.next('about');
+    this.router.navigate(['/about']).then(() => {
+      const el = document.getElementById('container-principal');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 
 }
