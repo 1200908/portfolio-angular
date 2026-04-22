@@ -288,6 +288,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
             scrub: true
           },
           opacity: 0,
+          pointerEvents: 'none',
+          zIndex: -1,
           ease: 'none'
         });
 
