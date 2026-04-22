@@ -1,5 +1,6 @@
-import {Component, Inject, PLATFORM_ID} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import {Component, HostListener, Inject, PLATFORM_ID} from '@angular/core';
+import {NavigationEnd, Router, RouterModule} from '@angular/router';
+import {BehaviorSubject} from "rxjs";
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -9,8 +10,30 @@ import {Router, RouterModule} from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
+  isHome = false;
+  isScrolled: boolean = false;
+
+  static activeSection$ = new BehaviorSubject<string>('home');
+
+  get activeSection() {
+    return NavbarComponent.activeSection$.value;
+  }
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isHome = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/home';
+      }
+    });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollY = window.scrollY;
+
+    this.isScrolled = scrollY > 300; // ajusta este valor
+  }
   goToAbout() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -19,7 +42,7 @@ export class NavbarComponent {
 
   goToHome() {
     this.router.navigate(['/']).then(() => {
-      const el = document.getElementById('container-principals');
+      const el = document.getElementById('home');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
   }

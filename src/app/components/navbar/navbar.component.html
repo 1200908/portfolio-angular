@@ -1,11 +1,11 @@
-<nav class="navbar">
+<nav class="navbar" [class.scrolled]="isScrolled || ! isHome">
   <div class="nav-container">
-    <a  (click)="goToHome()" routerLinkActive="active" class="nav-logo">JV</a>
-    <ul class="nav-menu">
-      <li><a  (click)="goToHome()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-      <li><a  (click)="goToProjects()" routerLinkActive="active"  >Projects</a>
-      <li><a  (click)="goToJourney()" routerLinkActive="active"  >Journey</a>
-      <li><a  (click)="goToAbout()" routerLinkActive="active"  >About</a>
+    <a  (click)="goToHome()" routerLinkActive="active" class="nav-logo" [class.scrolled]="isScrolled || ! isHome">JV</a>
+    <ul class="nav-menu" [class.scrolled]="isScrolled || ! isHome">
+      <li><a  (click)="goToHome()" [class.active]="activeSection === 'home'" >Home</a></li>
+      <li><a  (click)="goToProjects()" [class.active]="activeSection === 'projects'"  >Projects</a>
+      <li><a  (click)="goToJourney()" [class.active]="activeSection === 'journey'" >Journey</a>
+      <li><a  (click)="goToAbout()" [class.active]="activeSection === 'about'"  >About</a>
     </ul>
   </div>
 </nav>
