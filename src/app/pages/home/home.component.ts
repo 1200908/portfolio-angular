@@ -730,6 +730,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   goToProject(route: string) {
+    NavbarComponent.activeSection$.next('projects');
     this.router.navigate([route]).then(() => {
       const el = document.getElementById('top');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
