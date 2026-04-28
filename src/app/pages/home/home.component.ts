@@ -105,6 +105,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
 
   goToEducation() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });

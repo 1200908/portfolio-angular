@@ -6,6 +6,7 @@ import {isPlatformBrowser, CommonModule} from "@angular/common";
 import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
 
 import { Chart, registerables } from 'chart.js';
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 Chart.register(...registerables);
 interface GithubLanguages {
@@ -32,6 +33,7 @@ export class TunanceComponent {
 
 
   goToAbout() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });

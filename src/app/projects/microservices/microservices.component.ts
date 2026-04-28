@@ -2,6 +2,7 @@ import {Component, ElementRef, Inject, PLATFORM_ID, ViewChild} from '@angular/co
 import {Router, RouterLink} from '@angular/router';
 import Typed from "typed.js";
 import {isPlatformBrowser} from "@angular/common";
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-microservices',
@@ -14,6 +15,7 @@ export class MicroservicesComponent {
 
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
   goToAbout() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });

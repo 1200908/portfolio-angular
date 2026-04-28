@@ -4,6 +4,7 @@ import Typed from "typed.js";
 import {GithubLanguagesChartComponent} from "../../components/github-languages-chart/github-languages-chart.component";
 import {isPlatformBrowser} from "@angular/common";
 import { GalleryComponent } from '../../shared/gallery/gallery.component';
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 
 @Component({
@@ -16,10 +17,11 @@ import { GalleryComponent } from '../../shared/gallery/gallery.component';
 export class BlogComponent {
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
   goToAbout() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
-      const el = document.getElementById('container-principal');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    });
+        const el = document.getElementById('container-principal');
+        if (el) el.scrollIntoView({behavior: 'smooth'});
+      });
   }
 
   goToHome() {

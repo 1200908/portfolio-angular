@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/dist/photoswipe.css';
 import {GalleryComponent} from "../../shared/gallery/gallery.component";
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 
 @Component({
@@ -19,6 +20,7 @@ import {GalleryComponent} from "../../shared/gallery/gallery.component";
 export class LibraryComponent {
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
   goToAbout() {
+    NavbarComponent.activeSection$.next('about');
     this.router.navigate(['/about']).then(() => {
       const el = document.getElementById('container-principal');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
