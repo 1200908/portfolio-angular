@@ -24,7 +24,7 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.scrollBottom = event.url === '/' || event.url === '/home' ? 120 : 28;
+        this.scrollBottom = event.url === '/' || event.url === '/home' ? 28 : 28;
       }
     });
   }

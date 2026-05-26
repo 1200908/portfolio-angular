@@ -49,14 +49,14 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       tags: ['Java', 'Spring Boot', 'Android', 'RabbitMQ', 'React Native'],
       route: '/projects/library'
     },
-    {
+    /*{
       id: 'auto-generated-blog',
       title: 'Auto-Generated Blogs',
       description: 'Full-stack blog with automated content generation using AI, built as a technical challenge.',
       image: 'assets/pic_blog.png',
       tags: ['React', 'Node.js', 'AWS EC2', 'PostgreSQL', 'Docker', 'AWS ECR', 'AWS CodeBuild'],
       route: '/projects/blog'
-    },
+    },*/
     {
       id: 'tunance-website',
       title: 'Tunance Website',
@@ -73,14 +73,14 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       tags: ['Angular', 'Portfolio', 'HTML5/CSS3', 'Responsive Design', 'Animations'],
       route: '/projects/portfolio'
     },
-    {
+     /*{
       id: 'java-microservices',
       title: 'Java Microservices Manager',
       description: 'Personal project showcasing a robust, scalable, and fully modular Java-based microservices architecture.',
       image: 'assets/backend.png',
       tags: ['Java', 'Spring Boot', 'Microservices', 'Spring Cloud', 'CQRS', 'Docker', 'JUnit'],
       route: '/projects/microservices'
-    },
+    },*/
   ];
 
 
@@ -167,7 +167,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
             // GSAP começa após 1s — tempo da animação CSS do título
             const tl = gsap.timeline({
-              delay: 1,   // ← espera 1s pelo CSS terminar
+              delay: 0,   // ← espera 1s pelo CSS terminar
               defaults: { ease: 'power3.out' },
               onComplete: () => initScrollAnimations()
             });
@@ -815,41 +815,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   startAnimation() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // evita múltiplos loops
-    if (this.animationId) return;
-
-    const animate = () => {
-      if (!this.paused) {
-        this.icons = this.icons.map(icon => {
-          const dx = icon.x - this.mouseX;
-          const dy = icon.y - this.mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const repelRadius = 15;
-
-          if (dist < repelRadius && dist > 0) {
-            const force = (repelRadius - dist) / repelRadius;
-            icon.vx += (dx / dist) * force * 0.5;
-            icon.vy += (dy / dist) * force * 0.5;
-          }
-
-          icon.vx *= 0.92;
-          icon.vy *= 0.92;
-          icon.x  += icon.vx;
-          icon.y  += icon.vy;
-
-          if (icon.x < 0)  { icon.x = 0;  icon.vx *= -1; }
-          if (icon.x > 95) { icon.x = 95; icon.vx *= -1; }
-          if (icon.y < 0)  { icon.y = 0;  icon.vy *= -1; }
-          if (icon.y > 90) { icon.y = 90; icon.vy *= -1; }
-
-          return icon;
-        });
-      }
-
-      this.animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
   }
 
   goToAbout() {
