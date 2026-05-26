@@ -35,7 +35,6 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-home',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent, ScrollRevealDirective, LottieComponent ],
   templateUrl: './home.component.html',
