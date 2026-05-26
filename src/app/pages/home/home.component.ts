@@ -6,7 +6,8 @@ import {
   Inject,
   ViewChild,
   HostListener,
-  OnInit, OnDestroy, ChangeDetectorRef, NgZone
+  OnInit, OnDestroy, ChangeDetectorRef, NgZone,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
@@ -34,6 +35,7 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-home',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [RouterLink , CommonModule, TimelineComponent, ChatbotComponent, ScrollRevealDirective, LottieComponent ],
   templateUrl: './home.component.html',
@@ -761,14 +763,11 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     { class: 'fa fa-cubes',     x: 78, y: 60, vx: 0, vy: 0, duration: 11, delay: 3 },
     { class: 'fa fa-database',  x: 42, y: 20, vx: 0, vy: 0, duration: 14, delay: 4 },
     { class: 'fa fa-lock',      x: 15, y: 50, vx: 0, vy: 0, duration: 10, delay: 5 },
-    { class: 'fab fa-react',       x: 22, y: 18, vx: 0, vy: 0, duration: 11, delay: 0.8 },  // React (tens no blog)
     { class: 'fab fa-npm',         x: 50, y: 40, vx: 0, vy: 0, duration: 9,  delay: 1.8 },  // npm / Node ecosystem
     { class: 'fa fa-server',       x: 85, y: 78, vx: 0, vy: 0, duration: 13, delay: 2.3 },  // microservices/servidor
     { class: 'fa fa-network-wired',x: 35, y: 72, vx: 0, vy: 0, duration: 10, delay: 3.2 },  // redes / telecom
     { class: 'fa fa-shield-alt',   x: 63, y: 35, vx: 0, vy: 0, duration: 12, delay: 4.1 },  // segurança / JWT
     { class: 'fa fa-code-branch',  x: 7,  y: 60, vx: 0, vy: 0, duration: 8,  delay: 5.2 },  // git branching
-    { class: 'fa fa-cogs',         x: 95, y: 20, vx: 0, vy: 0, duration: 14, delay: 0.3 },  // configuração / Spring Cloud
-    { class: 'fa fa-exchange-alt', x: 48, y: 90, vx: 0, vy: 0, duration: 11, delay: 6.0 },  // Rabb
   ];
 
   activeSection: string = 'home'; // secção atual
@@ -785,6 +784,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     this.typed?.destroy();
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     if (this.observer) this.observer.disconnect();
+    gsap.globalTimeline.clear(); // limpa tweens soltos
   }
 
   setupIntersectionObserver() {
@@ -802,12 +802,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       const el = document.getElementById(id);
       if (el) this.observer.observe(el);
     });
-  }
-  @HostListener('mousemove', ['$event'])
-  onMouseMove(e: MouseEvent) {
-    if (!isPlatformBrowser(this.platformId)) return;
-    this.mouseX = (e.clientX / window.innerWidth) * 100;
-    this.mouseY = (e.clientY / window.innerHeight) * 100;
   }
 
   private paused = false; // controla se a animação está pausada
